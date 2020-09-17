@@ -1,0 +1,26 @@
+  * Frontend:
+    - JavaScript +
+    - ReactJS +
+    - Redux / Redux thunk +
+    - Fetch +
+    - Date-fns ?
+    - Material UI (Customs) + css/scss +
+  * Backend:
+    - JavaScript
+    - NodeJS
+    - ExpressJS
+    - Express validator
+    - mongoose
+    - Auth: JsonWebToken-js
+    - Multer (uploads files)
+    - Cloudinary (uploads images)
+    - Nodemailer (dispatch email)
+    - Concurrently
+  * DataBase:
+    - NoSQL: MongoDB
+  * Tests:
+    - Unit-tests (JestJS)
+/------------------------
+/  * Deploy:             |
+/    - Firebase          |
+/------------------------
