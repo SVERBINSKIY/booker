@@ -1,8 +1,10 @@
 // entry point to client-app
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import "variables";
 @import "mixins";
 @import "nulling";
+@import "header";
 
 // all width: 1820px (margin: 0 10px;)
 // height: 80px (header)
@@ -11,3 +13,15 @@
 // second block: height: 500px;
 // third block: height: 500px;
 // margin block: 140px
+
+.wrapper {
+  max-width: 1820px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 80px 1fr;
+  grid-template-areas: "header" "null";
+
+  .header {
+    grid-area: header;
+  }
+}
