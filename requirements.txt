@@ -8,14 +8,16 @@
   * Backend:
     - JavaScript
     - NodeJS
-    - ExpressJS
-    - Express validator
-    - mongoose
-    - Auth: JsonWebToken-js
-    - Multer (uploads files)
-    - Cloudinary (uploads images)
-    - Nodemailer (dispatch email)
-    - Concurrently
+    - ExpressJS +
+    - Express validator +
+    - mongoose +
+    - Auth: JsonWebToken-js +
+    - Multer (uploads files)        !
+    - Cloudinary (uploads images)   !
+    - Nodemailer (dispatch email)   !
+    - Concurrently (dev) +
+    - Nodemon (dev) +
+    - Config +
   * DataBase:
     - NoSQL: MongoDB
   * Tests:
