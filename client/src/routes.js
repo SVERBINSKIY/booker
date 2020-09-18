@@ -1,6 +1,6 @@
 import React from 'react'
 import {Switch, Route} from 'react-router-dom'
-import { MainPage } from './Pages/MainPage'
+import { MainPage } from './Pages/MainPages/MainPage'
 import { Catalog } from './Pages/Catalog'
 
 export const useRoutes = () => {

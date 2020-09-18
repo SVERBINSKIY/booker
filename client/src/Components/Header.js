@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {NavLink} from 'react-router-dom'
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import logo from '../resourses/header/logo.png'
 
 export const Header = (props) => {
