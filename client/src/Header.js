@@ -1,7 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import logo from './resourses/header/logo.png'
 
 export const Header = (props) => {
+  const [classes, setClasses] = useState(['none'])
+  const addClassHandler = () => {
+    if (classes.length === 1) {
+      setClasses(prevState => [...prevState, 'mm-active'])
+    } else {
+      setClasses(['none'])
+    }
+    console.log(classes)
+  }
+
   return (
     <header className='header'>
       <div className='logo'>
@@ -48,6 +58,19 @@ export const Header = (props) => {
         <div className='signup btn'>
           <span className='btn-text'>Signup</span>
         </div>
+      </div>
+      <div className={classes.length === 2 ? 'mobile-menu__opened' : 'mobile-menu'} onClick={addClassHandler}></div>
+      <div className={classes.length === 2 ? classes[1] : classes[0]}>
+        <ul className='mm-ul'>
+          <li className='mobile-item'>Home</li>
+          <li className='mobile-item'>Hotels</li>
+          <li className='mobile-item'>Blog</li>
+          <li className='mobile-item'>Contact</li>
+          <li className='mobile-item'>About</li>
+          <li className='mobile-item'>Faqs</li>
+          <li className='mobile-item'>Login</li>
+          <li className='mobile-item'>Signup</li>
+        </ul>
       </div>
     </header>
   )
