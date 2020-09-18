@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-import logo from './resourses/header/logo.png'
+import {NavLink} from 'react-router-dom'
+import logo from '../resourses/header/logo.png'
 
 export const Header = (props) => {
   const [classes, setClasses] = useState(['none'])
@@ -20,12 +21,12 @@ export const Header = (props) => {
       </div>
       <nav className='nav'>
         <ul className='menu-list'>
-          <li className='menu-item'>Home</li>
-          <li className='menu-item'>Hotels</li>
-          <li className='menu-item'>Blog</li>
-          <li className='menu-item'>Contact</li>
-          <li className='menu-item'>About</li>
-          <li className='menu-item'>Faqs</li>
+          <li className='menu-item'><NavLink to='/' activeStyle={{color: '#1E2325'}}>Home</NavLink></li>
+          <li className='menu-item'><NavLink to='/catalog' activeStyle={{color: '#1E2325'}}>Hotels</NavLink></li>
+          <li className='menu-item'><NavLink to='/blog' activeStyle={{color: '#1E2325'}}>Blog</NavLink></li>
+          <li className='menu-item'><NavLink to=' /contact' activeStyle={{color: '#1E2325'}}>Contact</NavLink></li>
+          <li className='menu-item'><NavLink to='/about' activeStyle={{color: '#1E2325'}}>About</NavLink></li>
+          <li className='menu-item'><NavLink to='/faqs' activeStyle={{color: '#1E2325'}}>Faqs</NavLink></li>
         </ul>
       </nav>
       <div className='control-panel'>

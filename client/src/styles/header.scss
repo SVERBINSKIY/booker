@@ -31,7 +31,7 @@
       display: flex;
       justify-content: space-between;
 
-      .menu-item {
+      .menu-item a {
         text-transform: uppercase;
         font-weight: 600;
         cursor: pointer;
@@ -80,6 +80,7 @@
 
       .hide-currency {
         visibility: hidden;
+        background-color: $background-color;
         opacity: 0;
         z-index: 100;
         width: 110px;
@@ -138,6 +139,7 @@
       }
 
       .hide-language {
+        background-color: $background-color;
         visibility: hidden;
         opacity: 0;
         z-index: 100;
