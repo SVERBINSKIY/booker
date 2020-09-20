@@ -1,22 +1,21 @@
 @import "variables";
 
 .main-page {
+  max-width: 1820px;
   margin-top: 10px;
   display: grid;
-  grid-template-rows: 800px 650px 530px;
+  grid-template-rows: minmax(800px, auto) minmax(600px, auto) minmax(530px, auto);
   grid-template-areas: "first" "second" "third";
   grid-gap: 140px;
 
   .first {
     grid-area: first;
-    height: 100%;
     width: 100%;
     background: url("../resourses/1.png") no-repeat;
-    background-size: 100% 100%;
     border-radius: 10px;
     .form-control {
-      width: 1200px;
-      height: 300px;
+      max-width: 1200px;
+      min-height: 300px;
       margin: 250px auto;
       z-index: 100;
       .first-text {
@@ -32,7 +31,7 @@
       .second-text {
         margin-top: 20px;
         display: block;
-        width: 620px;
+        max-width: 620px;
         background-color: $secondary-color;
         font-size: 34px;
         font-weight: 600;
@@ -44,7 +43,7 @@
       .form {
         margin-top: 20px;
         width: 100%;
-        height: 140px;
+        min-height: 140px;
         background-color: $background-color;
         border-radius: 7px;
         padding: 30px 15px;
@@ -54,15 +53,73 @@
         grid-gap: 15px;
         .where {
           grid-area: where;
+          position: relative;
+          &::after {
+            font-family: "FontAwesome";
+            font-size: 20px;
+            content: "\f041";
+            color: $primary-color;
+            position: absolute;
+            top: 43px;
+            left: 10px;
+          }
         }
         .check-in {
           grid-area: check-in;
+          position: relative;
+          .DayPickerInput {
+            height: 100%;
+            max-width: 135px;
+            input {
+              height: 100%;
+              width: 100%;
+              font-size: 14px;
+            }
+          }
+          &::after {
+            font-family: "FontAwesome";
+            font-size: 15px;
+            content: "\f073";
+            color: $primary-color;
+            position: absolute;
+            top: 45px;
+            left: 10px;
+          }
         }
         .check-out {
           grid-area: check-out;
+          position: relative;
+          .DayPickerInput {
+            height: 100%;
+            max-width: 135px;
+            input {
+              width: 100%;
+              height: 100%;
+              font-size: 14px;
+            }
+          }
+          &::after {
+            font-family: "FontAwesome";
+            font-size: 15px;
+            content: "\f073";
+            color: $primary-color;
+            position: absolute;
+            top: 45px;
+            left: 10px;
+          }
         }
         .guest {
           grid-area: guest;
+          position: relative;
+          &::after {
+            font-family: "FontAwesome";
+            font-size: 15px;
+            content: "\f007";
+            color: $primary-color;
+            position: absolute;
+            top: 45px;
+            left: 10px;
+          }
         }
         .search {
           grid-area: search;
@@ -71,11 +128,16 @@
             height: 50px;
             background-color: $secondary-color;
             border-radius: 7px;
-            margin-top: 30px;
+            margin-top: 28px;
             color: $background-color;
             font-size: 18px;
             font-weight: 500;
             text-transform: uppercase;
+            box-shadow: 0px 4px 10px rgba(253, 183, 20, .5);
+            transition: all 0.25s ease-in-out;
+            &:hover {
+              box-shadow: none;
+            }
           }
         }
         .form-title {
@@ -105,6 +167,7 @@
 
   .second {
     grid-area: second;
+    width: 100%;
     .second-wrapper {
       max-width: 1200px;
       margin: 0 auto;
@@ -133,21 +196,20 @@
           height: 3px;
           border-radius: 1px;
           background-color: $primary-color;
-          position: absolute;
-          top: 55px;
-          left: 555px;
+          margin-left: 46%;
+          margin-top: 2%;
         }
       }
       .hot-tour {
         width: 100%;
-        height: 370px;
+        min-height: 370px;
         background-color: #eee;
         margin-top: 65px;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-gap: 10px;
         .hotel {
-          padding: 18px;
+          padding: 10px;
           background: url("../resourses/london.png") no-repeat;
           background-size: 100% 100%;
           position: relative;
@@ -156,16 +218,14 @@
           cursor: pointer;
           transition: all 0.3s ease;
           .hotel-wrapper {
-            width: 245px;
-            height: 100px;
+            width: 100%;
+            min-height: 100px;
             background-color: rgba(255, 255, 255, .6);
             border-radius: 20px;
-            margin-left: 5px;
-            position: absolute;
             text-align: center;
             .city-name {
               display: block;
-              margin-top: 20px;
+              padding-top: 20px;
               font-size: 24px;
               font-weight: 500;
               color: $text-primary-color;
@@ -185,13 +245,14 @@
         }
       }
       .btn {
+        margin: 9% 40%;
         height: 50px;
         width: 270px;
         border: 1px solid $border-color;
         background-color: $background-color;
-        position: absolute;
-        left: 465px;
-        bottom: 0;
+        //position: absolute;
+        //left: 465px;
+        //bottom: 0;
         color: $text-secondary-color;
         text-transform: uppercase;
         &:hover {
@@ -203,13 +264,15 @@
 
   .third {
     grid-area: third;
-    background: url("../resourses/123.png");
+    background: url("../resourses/123.png") no-repeat;
     border-radius: 10px;
     .third-wrapper {
       z-index: 300;
-      width: 500px;
-      height: 180px;
-      margin: 200px 0 0 1000px;
+      max-width: 500px;
+      min-height: 180px;
+      float: right;
+      margin-right: 17.3%;
+      margin-top: 9%;
       .third-title {
         font-size: 30px;
         font-weight: 500;
@@ -220,7 +283,7 @@
       }
       p {
         margin-left: 15px;
-        width: 454px;
+        max-width: 454px;
         font-size: 20px;
         margin-bottom: 15px;
       }

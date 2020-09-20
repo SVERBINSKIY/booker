@@ -18,7 +18,7 @@ html, body {
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
-input, button, textarea {font-family: inherit;}
+input, button, textarea {font-family: inherit; display: block}
 input::-ms-clear {display: none;}
 button {cursor: pointer;}
 button::-moz-focus-inner {padding: 0; border: 0;}

@@ -6,45 +6,17 @@
 @import "nulling";
 @import "header";
 @import "mainPage";
+@import "authPage";
+@import "catalog";
 
 .wrapper {
   max-width: 1820px;
   margin: 0 auto;
   display: grid;
-  grid-template-rows: 80px 1fr 470px;
-  grid-template-areas: "header" "content" "footer";
+  grid-template-rows: 80px 1fr;
+  grid-template-areas: "header" "content";
 
   .header {
     grid-area: header;
-  }
-  .content {
-    grid-area: content;
-  }
-
-  @media screen and (max-width: 1600px) {
-    margin: 0 10px;
-    .header {
-      grid-template-columns: 310px 1fr 310px;
-      grid-template-areas: "logo nav login";
-      .control-panel{
-        display: none;
-      }
-    }
-  }
-  @media screen and (max-width: 1050px) {
-    .header {
-      grid-template-columns: 1fr 100px;
-      grid-template-areas: "logo login";
-      .nav {display: none}
-      .sign-login {display: none}
-      .mobile-menu {
-        display: block;
-        margin-left: 70px;
-      }
-      .mobile-menu__opened {
-        display: block;
-        margin-left: 70px;
-      }
-    }
   }
 }

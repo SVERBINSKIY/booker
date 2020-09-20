@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
+
 import logo from '../resourses/header/logo.png'
 
 export const Header = (props) => {
   const [classes, setClasses] = useState(['none'])
+  const history = useHistory()
   const addClassHandler = () => {
     if (classes.length === 1) {
       setClasses(prevState => [...prevState, 'mm-active'])
@@ -24,7 +26,7 @@ export const Header = (props) => {
           <li className='menu-item'><NavLink to='/' activeStyle={{color: '#1E2325'}}>Home</NavLink></li>
           <li className='menu-item'><NavLink to='/catalog' activeStyle={{color: '#1E2325'}}>Hotels</NavLink></li>
           <li className='menu-item'><NavLink to='/blog' activeStyle={{color: '#1E2325'}}>Blog</NavLink></li>
-          <li className='menu-item'><NavLink to=' /contact' activeStyle={{color: '#1E2325'}}>Contact</NavLink></li>
+          <li className='menu-item'><NavLink to='/contact' activeStyle={{color: '#1E2325'}}>Contact</NavLink></li>
           <li className='menu-item'><NavLink to='/about' activeStyle={{color: '#1E2325'}}>About</NavLink></li>
           <li className='menu-item'><NavLink to='/faqs' activeStyle={{color: '#1E2325'}}>Faqs</NavLink></li>
         </ul>
@@ -53,10 +55,10 @@ export const Header = (props) => {
         </div>
       </div>
       <div className='sign-login'>
-        <div className='login btn'>
+        <div className='login btn' onClick={() => history.push('/login')}>
           <span className='btn-text'>Login</span>
         </div>
-        <div className='signup btn'>
+        <div className='signup btn' onClick={() => history.push('/register')}>
           <span className='btn-text'>Signup</span>
         </div>
       </div>

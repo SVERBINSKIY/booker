@@ -9,9 +9,7 @@ function App() {
     <BrowserRouter>
       <div className='wrapper'>
         <Header />
-        <div className='content'>
-          { routes }
-        </div>
+        { routes }
       </div>
     </BrowserRouter>
   )
