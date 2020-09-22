@@ -1,9 +1,10 @@
 import React from 'react'
 
-export const CatalogHeader = () => {
+export const CatalogHeader = ({ countFindHotels, catalogLayout }) => {
+
   return (
     <div className='catalog__header'>
-      <span>8 Hotels Find</span>
+      <span>{countFindHotels} Hotels Find</span>
       <div className='catalog__header__right-menu'>
         <div className='sort'>
           Sort By
@@ -14,10 +15,10 @@ export const CatalogHeader = () => {
             </ul>
           </div>
         </div>
-        <div className='layout'>
+        <div className={`layout ${catalogLayout === 'list' ? 'active' : ''}`}>
           <i className="fa fa-bars" aria-hidden="true"></i>
         </div>
-        <div className='layout active'>
+        <div className={`layout ${catalogLayout === 'grid' ? 'active' : ''}`}>
           <i className="fa fa-th" aria-hidden="true"></i>
         </div>
       </div>
