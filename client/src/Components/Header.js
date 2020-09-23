@@ -68,14 +68,14 @@ export const Header = (props) => {
       <div className={classes.length === 2 ? 'mobile-menu__opened' : 'mobile-menu'} onClick={addClassHandler}></div>
       <div className={classes.length === 2 ? classes[1] : classes[0]}>
         <ul className='mm-ul'>
-          <li className='mobile-item'>Home</li>
-          <li className='mobile-item'>Hotels</li>
+          <li className='mobile-item' onClick={() => history.push('/')}>Home</li>
+          <li className='mobile-item' onClick={() => history.push('/catalog')}>Hotels</li>
           <li className='mobile-item'>Blog</li>
           <li className='mobile-item'>Contact</li>
           <li className='mobile-item'>About</li>
           <li className='mobile-item'>Faqs</li>
-          <li className='mobile-item'>Login</li>
-          <li className='mobile-item'>Signup</li>
+          <li className='mobile-item' onClick={() => history.push('/login')}>Login</li>
+          <li className='mobile-item' onClick={() => history.push('/register')}>Signup</li>
         </ul>
       </div>
     </header>
