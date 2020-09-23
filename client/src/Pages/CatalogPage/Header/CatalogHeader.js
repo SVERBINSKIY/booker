@@ -4,7 +4,7 @@ export const CatalogHeader = ({ countFindHotels, catalogLayout }) => {
 
   return (
     <div className='catalog__header'>
-      <span>{countFindHotels} Hotels Find</span>
+      <span className='header-title'>{countFindHotels} Hotels Find</span>
       <div className='catalog__header__right-menu'>
         <div className='sort'>
           Sort By

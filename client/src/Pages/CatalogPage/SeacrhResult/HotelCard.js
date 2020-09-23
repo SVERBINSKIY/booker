@@ -12,7 +12,7 @@ export const HotelCard = ({ hotelName, hotelLocation, hotelStars, hotelDescripti
         <p className='hotel-description'>{hotelDescription}</p>
       </div>
       <div className='price-btn'>
-        <p className='hotel-price'><span>${hotelPrice}</span>/Per Night</p>
+        <p className='hotel-price'><span className='price'>${hotelPrice}</span>/Per Night</p>
         <button className='hotel-see-more'>See Details >></button>
       </div>
     </div>
