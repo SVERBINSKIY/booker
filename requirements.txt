@@ -20,6 +20,8 @@
     - Config +
   * DataBase:
     - NoSQL: MongoDB
+  * Storage:
+    - Cloudinary
   * Tests:
     - Unit-tests (JestJS)
 /------------------------

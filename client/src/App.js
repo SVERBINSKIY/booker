@@ -1,9 +1,17 @@
 import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import { Header } from './Components/Header'
+import { useRoutes } from './routes'
 
 function App() {
+  const routes = useRoutes()
   return (
-    <div className="App">
-    </div>
+    <BrowserRouter>
+      <div className='wrapper'>
+        <Header />
+        { routes }
+      </div>
+    </BrowserRouter>
   )
 }
 
