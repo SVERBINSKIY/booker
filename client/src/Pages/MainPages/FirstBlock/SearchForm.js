@@ -1,24 +1,26 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import 'react-day-picker/lib/style.css'
 
 export const SearchForm = () => {
+  const history = useHistory()
   const [form, setForm] = useState({
     where: '',
     checkIn: {
-      day: null,
-      month: null,
-      year: null
+      day: 0,
+      month: 0,
+      year: 0
     },
     checkOut: {
-      day: null,
-      month: null,
-      year: null
+      day: 0,
+      month: 0,
+      year: 0
     },
     guest: {
-      rooms: null,
-      adults: null,
-      children: null
+      rooms: 0,
+      adults: 0,
+      children: 0
     }
   })
 
@@ -34,6 +36,7 @@ export const SearchForm = () => {
   }
   const handleSubmit = event => {
     event.preventDefault()
+    history.push('/catalog')
     console.log(form)
   }
   const handleInput = event => {
