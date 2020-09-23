@@ -363,4 +363,33 @@
       }
     }
   }
+
+  @media (max-width: 1200px) {
+    .catalog__container {
+      max-width: 934px;
+      margin: 0 auto;
+      .catalog__menu {
+        display: flex;
+        flex-direction: row;
+      }
+      .catalog__search-result-grid {
+        grid-template-columns: repeat(2, 294px);
+        grid-auto-columns: 290px;
+      }
+    }
+  }
+  @media (max-width: 934px) {
+    .catalog__container {
+      max-width: 667px;
+      .catalog__menu {
+        display: flex;
+        flex-direction: row;
+      }
+      .catalog__search-result-grid {
+        margin: 0 auto;
+        grid-template-columns: repeat(1, 294px);
+        grid-auto-columns: 290px;
+      }
+    }
+  }
 }

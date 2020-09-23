@@ -7,6 +7,7 @@
   grid-template-columns: 310px 1fr 1fr 310px;
   grid-template-areas: "logo nav control login";
   padding: 15px 0;
+  position: relative;
   .logo {
     grid-area: logo;
     cursor: pointer;
@@ -27,18 +28,15 @@
   .nav {
     grid-area: nav;
     padding: 20px 0 0 0;
-
     .menu-list {
       display: flex;
       justify-content: space-between;
-
       .menu-item a {
         text-transform: uppercase;
         font-weight: 600;
         cursor: pointer;
         color: $text-secondary-color;
         transition: all 0.3s ease;
-
         &:hover {
           color: $text-primary-color;
         }
@@ -50,7 +48,6 @@
     margin: 5px 0 0 340px;
     display: flex;
     justify-content: space-between;
-
     .border {
       border: 1px solid $border-color;
       border-radius: 7px;
@@ -68,17 +65,14 @@
         color: $text-secondary-color;
       }
     }
-
     .currency {
       width: 110px;
       height: 40px;
-
       .selected-currency {
         display: inline-block;
         padding: 12px;
         color: $text-secondary-color;
       }
-
       .hide-currency {
         visibility: hidden;
         background-color: $background-color;
@@ -106,7 +100,6 @@
           }
         }
       }
-
       &:hover {
         .selected-currency {
           color: $text-primary-color;
@@ -128,17 +121,14 @@
         }
       }
     }
-
     .language {
       width: 130px;
       height: 40px;
-
       .selected-language {
         display: inline-block;
         padding: 12px;
         color: $text-secondary-color;
       }
-
       .hide-language {
         background-color: $background-color;
         visibility: hidden;
@@ -151,10 +141,8 @@
         box-shadow: 2px 2px 8px 0px rgba(34, 60, 80, 0.2);
         padding: 10px 25px;
         transition: all 0.3s ease;
-
         .menu-language {
           line-height: 25px;
-
           .item-language {
             color: $text-secondary-color;
             cursor: pointer;
@@ -165,12 +153,10 @@
           }
         }
       }
-
       &:hover {
         .selected-language {
           color: $text-primary-color;
         }
-
         &::after {
           font-family: "FontAwesome";
           font-size: 17px;
@@ -180,7 +166,6 @@
           right: 10px;
           color: $text-primary-color;
         }
-
         .hide-language {
           opacity: 1;
           visibility: visible;
@@ -228,7 +213,7 @@
     }
   }
   .mobile-menu {
-    grid-area: login;
+    grid-area: mobile;
     cursor: pointer;
     display: none;
     &::after {
@@ -238,9 +223,12 @@
       color: $text-secondary-color;
       position: absolute;
       top: 23px;
+
       transition: transform .5s;
     }
     &__opened {
+      display: flex;
+      flex-direction: row-reverse;
       cursor: pointer;
       &::after {
         font-family: "FontAwesome";
@@ -255,19 +243,18 @@
     }
   }
   .mm-active {
-    display: flex;
+    position: absolute;
+    top: 70px;
     z-index: 200;
     width: 100%;
-    height: 420px;
-    position: absolute;
-    top: 80px;
+    margin-top: 20px;
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     border: 1px solid $border-color;
     background-color: $background-color;
     .mm-ul {
       width: 100%;
       height: 100%;
-      margin: 15px;
+      padding: 15px;
       .mobile-item {
         width: 100%;
         padding: 15px 0;
@@ -283,8 +270,38 @@
         }
       }
     }
+
+    @media (max-width: 1200px) {max-width: 934px}
+    @media (max-width: 934px) {max-width: 667px}
   }
   .none {
     display: none;
+  }
+
+
+
+  @media (max-width: 1600px) {
+    grid-template-columns: 310px 2fr 310px;
+    grid-template-areas: "logo nav login";
+    .control-panel {
+      display: none;
+    }
+    .mobile-menu {
+      display: none;
+    }
+  }
+  @media (max-width:1200px) {
+    grid-template-columns: 310px 1fr;
+    grid-template-areas: "logo mobile";
+    .nav {
+      display: none;
+    }
+    .sign-login {
+      display: none;
+    }
+    .mobile-menu {
+      display: flex;
+      flex-direction: row-reverse;
+    }
   }
 }

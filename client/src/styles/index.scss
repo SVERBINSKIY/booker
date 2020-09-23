@@ -19,4 +19,16 @@
   .header {
     grid-area: header;
   }
+  @media (max-width: 1600px) {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  @media (max-width: 1200px) {
+    max-width: 934px;
+    margin: 0 auto;
+  }
+  @media (max-width: 934px) {
+    max-width: 667px;
+    margin: 0 auto;
+  }
 }

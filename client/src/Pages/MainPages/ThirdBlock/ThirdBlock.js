@@ -8,7 +8,7 @@ export const ThirdBlock = () => {
         <p>Sign up for member price and you cloud save 10% or more on thousands of hotel</p>
         <div className='input-wrapper'>
           <input type='text' placeholder='Your email address'/>
-          <button>Signup</button>
+          <button className='third__btn'>Signup</button>
         </div>
       </div>
     </section>

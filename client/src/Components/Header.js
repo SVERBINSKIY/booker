@@ -62,6 +62,9 @@ export const Header = (props) => {
           <span className='btn-text'>Signup</span>
         </div>
       </div>
+
+
+
       <div className={classes.length === 2 ? 'mobile-menu__opened' : 'mobile-menu'} onClick={addClassHandler}></div>
       <div className={classes.length === 2 ? classes[1] : classes[0]}>
         <ul className='mm-ul'>

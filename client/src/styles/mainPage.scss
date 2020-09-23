@@ -203,12 +203,13 @@
       .hot-tour {
         width: 100%;
         min-height: 370px;
-        background-color: #eee;
         margin-top: 65px;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-gap: 10px;
         .hotel {
+          height: 370px;
+          width: 292px;
           padding: 10px;
           background: url("../resourses/london.png") no-repeat;
           background-size: 100% 100%;
@@ -293,6 +294,7 @@
         background-color: rgba(0, 0, 0, .2);
         border-radius: 7px;
         padding: 10px;
+        display: flex;
         input {
           height: 100%;
           width: 330px;
@@ -310,6 +312,44 @@
           font-weight: 500;
           text-transform: uppercase;
         }
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .first {
+      .form-control {
+        max-width: 390px;
+        margin: 0 auto;
+        z-index: 100;
+        .form {
+          width: 100%;
+          grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+          grid-template-areas: "where" "check-in" "check-out" "guest" "search";
+          grid-gap: 15px;
+        }
+      }
+    }
+    .second {
+      max-width: 934px;
+      margin: 0 auto;
+      .second-wrapper {
+        max-width: 934px;
+        .hot-tour {
+          grid-template-columns: repeat(2, 1fr);
+          grid-auto-columns: 1fr;
+          .hotel {
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+    .third {
+      .third-title {
+        color: $background-color!important;
+      }
+      p {
+        color: $background-color;
       }
     }
   }
