@@ -20,6 +20,3 @@ export const FirstBlock = (props) => {
     </section>
   )
 }
-
-//console.log(day.toLocaleDateString())
-//{ first, hideGuest, showGuest, guestControl, setCheckIn, setCheckOut, mainPageInputChange }
