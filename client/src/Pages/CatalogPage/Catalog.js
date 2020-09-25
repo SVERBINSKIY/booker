@@ -33,7 +33,6 @@ const Catalog = ({ catalogLayout, countFindHotels, catalogToGrid, catalogToList 
       hotelPrice: 120
     },
   ]
-
   return (
     <div className='catalog'>
       <div className='catalog__container'>

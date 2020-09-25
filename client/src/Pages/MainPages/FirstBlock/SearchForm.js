@@ -3,47 +3,26 @@ import { useHistory } from 'react-router-dom'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import 'react-day-picker/lib/style.css'
 
-export const SearchForm = () => {
+export const SearchForm = ({ first, showGuest, hideGuest, guestControl, setCheckIn, setCheckOut, mainPageInputChange }) => {
   const history = useHistory()
-  const [form, setForm] = useState({
-    where: '',
-    checkIn: {
-      day: 0,
-      month: 0,
-      year: 0
-    },
-    checkOut: {
-      day: 0,
-      month: 0,
-      year: 0
-    },
-    guest: {
-      rooms: 0,
-      adults: 0,
-      children: 0
-    }
-  })
+  const [isGuest, setIsGuest] = useState(false)
 
-  const dateInChangeHandler = day => {
-    setForm(prev => ({...prev, ...{
-      checkIn: {day: day.getDate(), month: day.getMonth() + 1, year: day.getFullYear()}
-    }}))
-  }
-  const dateOutHandler = day => {
-    setForm(prev => ({...prev, ...{
-        checkOut: {day: day.getDate(), month: day.getMonth() + 1, year: day.getFullYear()}
-      }}))
-  }
   const handleSubmit = event => {
     event.preventDefault()
     history.push('/catalog')
-    console.log(form)
   }
   const handleInput = event => {
     event.persist()
-    setForm(prev => ({...prev, ...{
-      [event.target.name]: event.target.value
-      }}))
+    mainPageInputChange(event.target.name, event.target.value)
+  }
+  const handleGuestClick = () => {
+    if (!isGuest) {
+      setIsGuest(true)
+      showGuest()
+    } else {
+      setIsGuest(false)
+      hideGuest()
+    }
   }
 
   return (
@@ -55,7 +34,7 @@ export const SearchForm = () => {
           placeholder='Direction'
           name='where'
           className='form-input'
-          value={form.where}
+          value={first.where}
           onChange={handleInput}
         />
       </div>
@@ -63,7 +42,7 @@ export const SearchForm = () => {
         <span className='form-title'>Check In</span>
         <div className='form-input'>
           <DayPickerInput
-            onDayChange={dateInChangeHandler}
+            onDayChange={day => {setCheckIn(day)}}
           />
         </div>
       </div>
@@ -71,13 +50,69 @@ export const SearchForm = () => {
         <span className='form-title'>Check Out</span>
         <div className='form-input'>
           <DayPickerInput
-            onDayChange={dateOutHandler}
+            onDayChange={day => {setCheckOut(day)}}
           />
         </div>
       </div>
       <div className='guest'>
         <span className='form-title'>Guests</span>
-        <input type='text' placeholder="Who's going?" className='form-input'/>
+        <input type='text' placeholder="Who's going?" className='form-input' onClick={handleGuestClick}/>
+        <div className={`guestSection-${first.guests}`}>
+          <div className='guestSection__item'>
+            <div className='info'>
+              <p className='item-title'>Rooms</p>
+              <p className='sub-title'>Min 1 Room</p>
+            </div>
+            <div className='counter'>
+              <i className="fa fa-minus btn-counter" onClick={() => {guestControl('room', '-')}}></i>
+              <input
+                type='text'
+                name='rooms'
+                className='count-text'
+                min='1'
+                value={first.rooms}
+                readOnly
+              />
+              <i className="fa fa-plus btn-counter" onClick={() => {guestControl('room', '+')}}></i>
+            </div>
+          </div>
+          <div className='guestSection__item'>
+            <div className='info'>
+              <p className='item-title'>Adults</p>
+              <p className='sub-title'>18 And Older</p>
+            </div>
+            <div className='counter'>
+              <i className="fa fa-minus btn-counter"  onClick={() => {guestControl('adult', '-')}}></i>
+              <input
+                type='text'
+                name='adults'
+                className='count-text'
+                min='1'
+                value={first.adults}
+                readOnly
+              />
+              <i className="fa fa-plus btn-counter" onClick={() => {guestControl('adult', '+')}}></i>
+            </div>
+          </div>
+          <div className='guestSection__item'>
+            <div className='info'>
+              <p className='item-title'>Children</p>
+              <p className='sub-title'>Ages 2-18</p>
+            </div>
+            <div className='counter'>
+              <i className="fa fa-minus btn-counter" onClick={() => {guestControl('children', '-')}}></i>
+              <input
+                type='text'
+                name='children'
+                className='count-text'
+                min='0'
+                value={first.children}
+                readOnly
+              />
+              <i className="fa fa-plus btn-counter" onClick={() => {guestControl('children', '+')}}></i>
+            </div>
+          </div>
+        </div>
       </div>
       <div className='search'>
         <button className='btn' type='submit'>Search</button>
