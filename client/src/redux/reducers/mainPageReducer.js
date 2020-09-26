@@ -1,7 +1,7 @@
 import {
   ADD_TO_ADULT, ADD_TO_CHILDREN,
   ADD_TO_ROOM,
-  HIDE_GUEST_BLOCK, MAIN_PAGE_INPUT_CHANGE, SET_CHECK_IN, SET_CHECK_OUT,
+  HIDE_GUEST_BLOCK, MAIN_PAGE_INPUT_CHANGE, MAIN_PAGE_INPUT_CHANGE_FOR_EMAIL, SET_CHECK_IN, SET_CHECK_OUT,
   SHOW_GUEST_BLOCK,
   TAKE_AWAY_TO_ADULT, TAKE_AWAY_TO_CHILDREN,
   TAKE_AWAY_TO_ROOM
@@ -17,8 +17,31 @@ const initialState = {
     checkIn: {},
     checkOut: {}
   },
-  second: [],
-  third: ''
+  second: [
+    {
+      id: 1,
+      title: 'London',
+      hotelCount: 3200
+    },
+    {
+      id: 2,
+      title: 'New-York',
+      hotelCount: 5000
+    },
+    {
+      id: 3,
+      title: 'Berlin',
+      hotelCount: 4700
+    },
+    {
+      id: 4,
+      title: 'Seul',
+      hotelCount: 1200
+    }
+  ],
+  third: {
+    email: ''
+  }
 }
 
 export const mainPageReducer = (state = initialState, action) => {
@@ -45,6 +68,8 @@ export const mainPageReducer = (state = initialState, action) => {
       return { ...state, first: {...state.first, checkOut: action.payload} }
     case MAIN_PAGE_INPUT_CHANGE:
       return { ...state, first: {...state.first, [action.payload.name]: action.payload.value} }
+    case MAIN_PAGE_INPUT_CHANGE_FOR_EMAIL:
+      return { ...state, third: {...state.third, email: action.payload} }
     default:
       return state
   }

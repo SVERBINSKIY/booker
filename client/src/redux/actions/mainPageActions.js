@@ -4,13 +4,19 @@ import {
   HIDE_GUEST_BLOCK, SET_CHECK_IN, SET_CHECK_OUT,
   SHOW_GUEST_BLOCK,
   TAKE_AWAY_TO_ADULT, TAKE_AWAY_TO_CHILDREN,
-  TAKE_AWAY_TO_ROOM
+  TAKE_AWAY_TO_ROOM, MAIN_PAGE_INPUT_CHANGE_FOR_EMAIL
 } from '../types'
 
 export function mainPageInputChange(name, value) {
   return {
     type: MAIN_PAGE_INPUT_CHANGE,
     payload: { name, value }
+  }
+}
+export function mainPageEmailInputChange(value) {
+  return {
+    type: MAIN_PAGE_INPUT_CHANGE_FOR_EMAIL,
+    payload: value
   }
 }
 export function showGuest() {
