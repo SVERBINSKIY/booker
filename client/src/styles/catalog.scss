@@ -18,6 +18,7 @@
       display: grid;
       grid-template-columns: 380px 170px 170px 289px 151px;
       grid-gap: 10px;
+      .menu__where, .menu__check-in, .menu__check-out, .menu__guests {position: relative}
       .menu__where::after {
         font-family: "FontAwesome";
         font-size: 20px;
@@ -45,7 +46,7 @@
         top: 55px;
         left: 7px;
       }
-      span {
+      .menu-span {
         display: block;
         margin-bottom: 22px;
         font-size: 16px;
@@ -53,7 +54,6 @@
         color: $text-secondary-color;
       }
       input {
-        z-index: 100;
         width: 100%;
         height: 50px;
         border-radius: 7px;
@@ -62,9 +62,14 @@
         color: $text-secondary-color;
         font-size: 15px;
         box-shadow: 2px 4px 4px 0 rgba(34, 60, 80, 0.2);
+
         &:focus {
           color: $text-primary-color;
         }
+      }
+      .DayPickerInput-OverlayWrapper {
+        z-index: 10;
+        margin-top: 10px;
       }
       button {
         height: 50px;
@@ -77,13 +82,12 @@
         text-transform: uppercase;
         color: $background-color;
       }
-      div {position: relative;}
     }
 
     .catalog__header {
       grid-area: catalogHeader;
       padding: 22px 0;
-      span {
+      .header-title {
         display: inline-block;
         padding: 4px 0;
         font-size: 28px;
@@ -258,7 +262,7 @@
         .hotel-price {
           color: $text-secondary-color;
           margin-bottom: 15px;
-          span {
+          .price {
             font-size: 20px;
             font-weight: 600;
             color: $text-primary-color;
@@ -334,7 +338,7 @@
           .hotel-price {
             color: $text-secondary-color;
             margin-bottom: 15px;
-            span {
+            .price {
               font-size: 20px;
               font-weight: 600;
               color: $text-primary-color;

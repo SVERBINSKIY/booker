@@ -1,14 +1,12 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { MenuComponent } from './SearchMenu/MenuComponent'
 import { FilterComponent } from './FilterSide/FilterComponent'
 import { SearchResult } from './SeacrhResult/SearchResultComponent'
 import { CatalogHeader } from './Header/CatalogHeader'
+import { catalogToGrid, catalogToList } from '../../redux/actions/catalogActions'
 
-export const Catalog = () => {
-  const catalogState = {
-    catalogLayout: 'grid',
-    countFindHotels: 5
-  }
+const Catalog = ({ catalogLayout, countFindHotels, catalogToGrid, catalogToList }) => {
   const hotelsData = [
     {
       id: 0,
@@ -35,21 +33,32 @@ export const Catalog = () => {
       hotelPrice: 120
     },
   ]
-
   return (
     <div className='catalog'>
       <div className='catalog__container'>
         <MenuComponent />
         <CatalogHeader
-          countFindHotels={catalogState.countFindHotels}
-          catalogLayout={catalogState.catalogLayout}
+          countFindHotels={countFindHotels}
+          catalogLayout={catalogLayout}
+          catalogToGrid={catalogToGrid}
+          catalogToList={catalogToList}
         />
         <FilterComponent />
         <SearchResult
-          catalogLayout={catalogState.catalogLayout}
+          catalogLayout={catalogLayout}
           hotelsData={hotelsData}
         />
       </div>
     </div>
   )
 }
+
+const mapStateToProps = state => {
+  return state.catalog
+}
+const mapDispatchToProps = {
+  catalogToGrid,
+  catalogToList
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Catalog)

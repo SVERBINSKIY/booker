@@ -1,10 +1,17 @@
 import React from 'react'
 
-export const CatalogHeader = ({ countFindHotels, catalogLayout }) => {
+export const CatalogHeader = ({ countFindHotels, catalogLayout, catalogToGrid, catalogToList }) => {
+
+  const handleClickToGrid = () => {
+    catalogToGrid('grid')
+  }
+  const handleClickToList = () => {
+    catalogToList('list')
+  }
 
   return (
     <div className='catalog__header'>
-      <span>{countFindHotels} Hotels Find</span>
+      <span className='header-title'>{countFindHotels} Hotels Find</span>
       <div className='catalog__header__right-menu'>
         <div className='sort'>
           Sort By
@@ -15,10 +22,10 @@ export const CatalogHeader = ({ countFindHotels, catalogLayout }) => {
             </ul>
           </div>
         </div>
-        <div className={`layout ${catalogLayout === 'list' ? 'active' : ''}`}>
+        <div className={`layout ${catalogLayout === 'list' ? 'active' : ''}`} onClick={handleClickToList}>
           <i className="fa fa-bars" aria-hidden="true"></i>
         </div>
-        <div className={`layout ${catalogLayout === 'grid' ? 'active' : ''}`}>
+        <div className={`layout ${catalogLayout === 'grid' ? 'active' : ''}`} onClick={handleClickToGrid}>
           <i className="fa fa-th" aria-hidden="true"></i>
         </div>
       </div>
