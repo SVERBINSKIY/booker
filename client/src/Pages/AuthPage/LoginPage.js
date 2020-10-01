@@ -1,14 +1,17 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { changeSignInInput } from '../../redux/actions/loginPageAction'
+import { changeSignInInput, handleLogin } from '../../redux/actions/loginPageAction'
 
-const LoginPage = ({ email, password, changeSignInInput }) => {
+const LoginPage = ({login, changeSignInInput, handleLogin }) => {
   const handleInputChange = e => {
     changeSignInInput(e.target.name, e.target.value)
   }
   const handleFormSubmit = e => {
     e.preventDefault()
+    const form  = { email: login.signIn.email, password: login.signIn.password }
+    console.log(form)
+    handleLogin(form)
   }
   return (
     <div className='auth-page'>
@@ -20,7 +23,7 @@ const LoginPage = ({ email, password, changeSignInInput }) => {
           className='input'
           placeholder='Email'
           name='email'
-          value={email}
+          value={login.signIn.email}
           onChange={handleInputChange}
         />
         <input
@@ -28,7 +31,7 @@ const LoginPage = ({ email, password, changeSignInInput }) => {
           className='input'
           placeholder='Password'
           name='password'
-          value={password}
+          value={login.signIn.password}
           onChange={handleInputChange}
         />
         <button className='btn' type='submit'>Login to Your account</button>
@@ -41,7 +44,8 @@ const LoginPage = ({ email, password, changeSignInInput }) => {
 
 const mapStateToProps = state => state
 const mapDispatchToProps = {
-  changeSignInInput
+  changeSignInInput,
+  handleLogin
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
