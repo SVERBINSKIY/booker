@@ -9,10 +9,24 @@ const Profile = ({ handleLogout }) => {
     handleLogout()
     history.push('/')
   }
+  const handleRepresentativeClick = () => {
+    history.push('/representative/main')
+  }
   return (
-    <div>
-      <h1>Profile</h1>
+    <div className='profile-page'>
+      <div className='profile-page__header'>
+        <div className='profile-page__header__title'>
+          <h3>Profile Header</h3>
+        </div>
+        <div className='profile-page__header__representative'>
+          <button className='button' onClick={handleRepresentativeClick}>Representative</button>
+        </div>
+      </div>
+      <div className='profile-page__content'>
+        Profile Content
+      </div>
       <button onClick={handleLogoutClick}>Logout</button>
+
     </div>
   )
 }

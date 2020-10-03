@@ -45,7 +45,8 @@ export function handleLogin(form) {
       body
     })
     const data = await request.json()
-    if (data.status) {
+    console.log(data)
+    if (data.status && data.token) {
       localStorage.setItem(storageName, JSON.stringify({token: data.token, userId: data.userId}))
     }
     dispatch({ type: LOGIN_CHANGE, payload: {status: data.status, token: data.token, userId: data.userId} })
@@ -60,6 +61,15 @@ export function checkLogin() {
   }
 }
 export function handleLogout() {
-  localStorage.removeItem(storageName)
-  return { type: LOGOUT_CHANGE }
+  return async dispatch => {
+    const request = await fetch('/api/sign/out', {
+      method: 'GET'
+    })
+    const data = await request.json()
+    console.log(data)
+    if (data.status) {
+      localStorage.removeItem(storageName)
+      dispatch({ type: LOGOUT_CHANGE })
+    }
+  }
 }

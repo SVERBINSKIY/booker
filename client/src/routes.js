@@ -5,6 +5,8 @@ import MainPage from './Pages/MainPages/MainPage'
 import RegisterPage from './Pages/AuthPage/RegisterPage'
 import LoginPage from './Pages/AuthPage/LoginPage'
 import Profile from './Pages/Profile/Profile'
+import RepresentativeMainPage from './Pages/RepresentativePage/RepresentativeMainPage'
+import RepresentativeAddNewHotel from './Pages/RepresentativePage/RepresentativeAddNewHotel'
 
 export const useRoutes = isAuth => {
   if (isAuth) {
@@ -13,6 +15,8 @@ export const useRoutes = isAuth => {
         <Route path='/' component={MainPage} exact />
         <Route path='/catalog' component={Catalog} />
         <Route path='/profile' component={Profile} />
+        <Route path='/representative/main' component={RepresentativeMainPage} />
+        <Route path='/representative/add' component={RepresentativeAddNewHotel} />
         <Redirect to='/' />
       </Switch>
     )
