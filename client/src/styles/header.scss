@@ -211,6 +211,19 @@
         color: $background-color;
       }
     }
+
+    .profile {
+      width: 100%;
+      height: 40px;
+      border: 1px solid $border-color;
+      border-radius: 7px;
+      .profile-link {
+        float: right;
+        font-size: 18px;
+        padding: 11px;
+        color: $text-secondary-color;
+      }
+    }
   }
   .mobile-menu {
     grid-area: mobile;

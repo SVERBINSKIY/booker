@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { changeLoginInput } from '../../redux/actions/loginPageAction'
+import { changeLoginInput, handleRegister } from '../../redux/actions/loginPageAction'
 
-const RegisterPage = ({ mainPage, login, changeLoginInput }) => {
+const RegisterPage = ({ mainPage, login, changeLoginInput, handleRegister }) => {
   const onFirstEmail = mainPage.third.email
   useEffect(() => {
     changeLoginInput('email', onFirstEmail)
@@ -13,6 +13,8 @@ const RegisterPage = ({ mainPage, login, changeLoginInput }) => {
   }
   const handleFormSubmit = e => {
     e.preventDefault()
+    console.log(login.signUp)
+    handleRegister(login.signUp)
   }
 
   return (
@@ -64,7 +66,8 @@ const RegisterPage = ({ mainPage, login, changeLoginInput }) => {
 
 const mapStateToProps = state => state
 const mapDispatchToProps = {
-  changeLoginInput
+  changeLoginInput,
+  handleRegister
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage)

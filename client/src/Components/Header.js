@@ -12,7 +12,6 @@ export const Header = (props) => {
     } else {
       setClasses(['none'])
     }
-    console.log(classes)
   }
 
   return (
@@ -54,14 +53,24 @@ export const Header = (props) => {
           </div>
         </div>
       </div>
-      <div className='sign-login'>
-        <div className='login btn' onClick={() => history.push('/login')}>
-          <span className='btn-text'>Login</span>
-        </div>
-        <div className='signup btn' onClick={() => history.push('/register')}>
-          <span className='btn-text'>Signup</span>
-        </div>
-      </div>
+
+      {props.login
+        ? <div className='sign-login'>
+            <div className='profile'>
+              <NavLink className='profile-link' to='/profile'>
+                <span className='btn-text'>Profile</span>
+              </NavLink>
+            </div>
+          </div>
+        : <div className='sign-login'>
+            <div className='login btn' onClick={() => history.push('/login')}>
+              <span className='btn-text'>Login</span>
+            </div>
+            <div className='signup btn' onClick={() => history.push('/register')}>
+              <span className='btn-text'>Signup</span>
+            </div>
+          </div>
+      }
 
 
 
