@@ -7,16 +7,18 @@ import LoginPage from './Pages/AuthPage/LoginPage'
 import Profile from './Pages/Profile/Profile'
 import RepresentativeMainPage from './Pages/RepresentativePage/RepresentativeMainPage'
 import RepresentativeAddNewHotel from './Pages/RepresentativePage/RepresentativeAddNewHotel'
+import RepresentativeHotelPage from './Pages/RepresentativePage/RepresentativeHotelPage'
 
 export const useRoutes = isAuth => {
   if (isAuth) {
     return (
       <Switch>
         <Route path='/' component={MainPage} exact />
-        <Route path='/catalog' component={Catalog} />
-        <Route path='/profile' component={Profile} />
-        <Route path='/representative/main' component={RepresentativeMainPage} />
-        <Route path='/representative/add' component={RepresentativeAddNewHotel} />
+        <Route path='/catalog' component={Catalog} exact />
+        <Route path='/profile' component={Profile} exact />
+        <Route path='/representative/main' component={RepresentativeMainPage} exact />
+        <Route path='/representative/add' component={RepresentativeAddNewHotel} exact />
+        <Route path='/representative/hotel/:id' component={RepresentativeHotelPage}/>
         <Redirect to='/' />
       </Switch>
     )
