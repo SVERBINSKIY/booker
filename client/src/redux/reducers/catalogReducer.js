@@ -1,9 +1,10 @@
-import { CATALOG_TO_GRID, CATALOG_TO_LIST } from '../types'
+import { CATALOG_LOADING_ALL, CATALOG_TO_GRID, CATALOG_TO_LIST } from '../types'
 
 const initialState = {
   catalogLayout: 'grid',
-  countFindHotels: 3,
-  sort: 'toLower'
+  countFindHotels: 0,
+  sort: 'toLower',
+  hotels: []
 }
 
 export const catalogReducer = (state = initialState, action) => {
@@ -12,6 +13,8 @@ export const catalogReducer = (state = initialState, action) => {
       return {...state, catalogLayout: action.payload}
     case CATALOG_TO_LIST:
       return {...state, catalogLayout: action.payload}
+    case CATALOG_LOADING_ALL:
+      return { ...state, hotels: action.payload }
     default: return state
   }
 }

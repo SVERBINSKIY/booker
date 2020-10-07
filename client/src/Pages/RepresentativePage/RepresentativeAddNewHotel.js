@@ -4,15 +4,15 @@ import {
   handleAddHotel,
   handleInputChange,
   handleLoadCountry,
-  handleSelectCountry
+  handleSelectCountry,
 } from '../../redux/actions/representativeAction'
 
 const RepresentativeAddNewHotel = ({ representative,
                                      handleInputChange,
                                      handleLoadCountry,
                                      handleSelectCountry,
-                                     handleAddHotel }) => {
-
+                                     handleAddHotel}) => {
+  const formData = new FormData()
   useEffect(() => {
     handleLoadCountry()
   }, [handleLoadCountry])
@@ -26,10 +26,21 @@ const RepresentativeAddNewHotel = ({ representative,
     const value = e.target.value
     handleSelectCountry(name, value)
   }
+  const handleFileChange = e => {
+    const file = e.target.files[0]
+    formData.append('file', file)
+  }
   const handleAddHotelClick = e => {
     e.preventDefault()
     const form = representative.addHotel
-    handleAddHotel(form)
+    formData.append('name', form.name)
+    formData.append('country', form.country)
+    formData.append('city', form.city)
+    formData.append('stars', form.stars)
+    formData.append('description', form.description)
+    formData.append('minPrice', form.minPrice)
+    formData.append('maxPrice', form.maxPrice)
+    handleAddHotel(formData)
   }
 
   return (
@@ -37,7 +48,7 @@ const RepresentativeAddNewHotel = ({ representative,
       <div className='add-hotel__header'>
         <h2>Add New Hotel</h2>
       </div>
-      <div className='add-hotel__content'>
+      <form className='add-hotel__content'>
         <div>
           <h3>Title</h3>
           <input
@@ -96,9 +107,9 @@ const RepresentativeAddNewHotel = ({ representative,
         </div>
         <div>
           <h3>Load Photo</h3>
-          <input type='file' name='files' />
+          <input type='file' name='file' onChange={handleFileChange} />
         </div>
-      </div>
+      </form>
       <button onClick={handleAddHotelClick}>ADD</button>
     </div>
   )

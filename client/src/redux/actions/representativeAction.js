@@ -1,8 +1,12 @@
 import {
   REPRESENTATIVE_INPUT_CHANGE,
-  REPRESENTATIVE_LOAD_COUNTRY, REPRESENTATIVE_LOADING_HOTELS, REPRESENTATIVE_RESET_FORM,
+  REPRESENTATIVE_LOAD_COUNTRY,
+  REPRESENTATIVE_LOADING_HOTEL_BY_ID,
+  REPRESENTATIVE_LOADING_HOTELS,
+  REPRESENTATIVE_RESET_FORM,
   REPRESENTATIVE_SELECT_COUNTRY_LOAD_CITY
 } from '../types'
+import { hideLoader, showLoader } from './appActions'
 
 export function handleInputChange(name, value) {
   return {
@@ -37,14 +41,9 @@ export function handleSelectCountry(name, value) {
 }
 export function handleAddHotel(form) {
   return async dispatch => {
-    const body = JSON.stringify(form)
-    console.log(body)
     const request = await fetch('/api/hotel/add', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body
+      body: form
     })
     const data = await request.json()
     console.log(data.message)
@@ -53,6 +52,7 @@ export function handleAddHotel(form) {
 }
 export function handleLoadingHotels(id) {
   return async dispatch => {
+    dispatch(showLoader())
     const body = JSON.stringify({id})
     const request = await fetch('/api/hotel', {
       method: 'POST',
@@ -63,5 +63,17 @@ export function handleLoadingHotels(id) {
     })
     const data = await request.json()
     dispatch({type: REPRESENTATIVE_LOADING_HOTELS, payload: data.data})
+    dispatch(hideLoader())
+  }
+}
+export function handleLoadingHotelById(id) {
+  return async dispatch => {
+    dispatch(showLoader())
+    const request = await fetch(`/api/hotel/open/${id}`, {
+      method: 'GET'
+    })
+    const data = await request.json()
+    dispatch({ type: REPRESENTATIVE_LOADING_HOTEL_BY_ID, payload: data.data })
+    dispatch(hideLoader())
   }
 }

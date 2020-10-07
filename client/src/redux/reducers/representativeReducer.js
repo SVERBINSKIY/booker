@@ -1,6 +1,9 @@
 import {
   REPRESENTATIVE_INPUT_CHANGE,
-  REPRESENTATIVE_LOAD_COUNTRY, REPRESENTATIVE_LOADING_HOTELS, REPRESENTATIVE_RESET_FORM,
+  REPRESENTATIVE_LOAD_COUNTRY,
+  REPRESENTATIVE_LOADING_HOTEL_BY_ID,
+  REPRESENTATIVE_LOADING_HOTELS,
+  REPRESENTATIVE_RESET_FORM,
   REPRESENTATIVE_SELECT_COUNTRY_LOAD_CITY
 } from '../types'
 
@@ -15,8 +18,9 @@ const initialState = {
     stars: 0,
     description: '',
     minPrice: 0,
-    maxPrice: 0,
-  }
+    maxPrice: 0
+  },
+  selectedHotel: {}
 }
 
 export const representativeReducer = (state = initialState, action) => {
@@ -42,6 +46,8 @@ export const representativeReducer = (state = initialState, action) => {
       }
     case REPRESENTATIVE_LOADING_HOTELS:
       return { ...state, managedHotels: action.payload }
+    case REPRESENTATIVE_LOADING_HOTEL_BY_ID:
+      return { ...state, selectedHotel: action.payload }
     default:
       return state
   }

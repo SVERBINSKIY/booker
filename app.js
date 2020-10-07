@@ -1,11 +1,12 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const config = require('config')
 const session = require('express-session')
 const MongoStore = require('connect-mongodb-session')(session)
-const config = require('config')
 
 const varMiddleware = require('./middleware/variable.middleware')
 const userMiddleware = require('./middleware/user.middleware')
+const fileMiddleware = require('./middleware/file.middleware')
 
 const app = express()
 const PORT = config.get('PORT') || 3001
@@ -29,6 +30,7 @@ app.use(session({
 
 app.use(varMiddleware)
 app.use(userMiddleware)
+app.use(fileMiddleware.single('file'))
 
 app.use('/api/sign', require('./routes/auth.routes'))
 app.use('/api/country', require('./routes/country.routes'))
