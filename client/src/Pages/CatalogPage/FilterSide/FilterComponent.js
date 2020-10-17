@@ -2,9 +2,8 @@ import React from 'react'
 import { PriceRange } from './PriceRange'
 import { UserRating } from './UserRating'
 import { PropertyType } from './PropertyType'
-import { AmenityType } from './AmenityType'
 
-export const FilterComponent = () => {
+export const FilterComponent = ({ catalog, loading, handlePriceRangeChange, handleSetPropertyTypeChange }) => {
 const stateFilter = {
   priceRange: {
     filterName: 'Price Range'
@@ -14,18 +13,29 @@ const stateFilter = {
   },
   propertyType: {
     filterName: 'Property Type'
-  },
-  amenityName: {
-    filterName: 'Amenity Type'
   }
 }
 
+
+
   return (
     <div className='catalog__filter-side '>
-      <PriceRange filterName={stateFilter.priceRange.filterName}/>
-      <UserRating filterName={stateFilter.userRating.filterName} />
-      <PropertyType filterName={stateFilter.propertyType.filterName} />
-      <AmenityType filterName={stateFilter.amenityName.filterName} />
+      {
+        loading ? loading : <PriceRange
+                              filterName={stateFilter.priceRange.filterName}
+                              price={catalog.filterSide.price}
+                              handlePriceRangeChange={handlePriceRangeChange}
+                            />
+      }
+      <UserRating
+        filterName={stateFilter.userRating.filterName}
+        catalog={catalog}
+      />
+      <PropertyType
+        filterName={stateFilter.propertyType.filterName}
+        catalog={catalog}
+        handleSetPropertyTypeChange={handleSetPropertyTypeChange}
+      />
     </div>
   )
 }

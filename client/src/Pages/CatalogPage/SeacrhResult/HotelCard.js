@@ -8,7 +8,7 @@ export const HotelCard = ({ hotelName, hotelLocation, hotelStars, hotelDescripti
         <span className='hotel-name'>{hotelName}</span>
         <span className='hotel-location'>{hotelLocation.country.name} / {hotelLocation.city.name}</span>
         <div className='hotel-stars'>{hotelStars}</div>
-        <p className='hotel-description'>{hotelDescription.substr(0, 95)}...</p>
+        <p className='hotel-description'>{hotelDescription.substr(0, 100)}...</p>
       </div>
       <div className='price-btn'>
         <p className='hotel-price'><span className='price'>${hotelPrice}</span>/Per Night</p>

@@ -4,7 +4,7 @@ import { FirstBlock } from './FirstBlock/FirstBlock'
 import { SecondBlock } from './SecondBlock/SecondBlock'
 import { ThirdBlock } from './ThirdBlock/ThirdBlock'
 import {
-  guestControl,
+  guestControl, handleSearchSubmit,
   hideGuest, mainPageEmailInputChange,
   mainPageInputChange,
   setCheckIn,
@@ -16,26 +16,28 @@ const MainPage = (props) => {
   return (
     <div className='main-page'>
       <FirstBlock
-        first={props.first}
+        first={props.mainPage.first}
+        app={props.app}
         showGuest={props.showGuest}
         hideGuest={props.hideGuest}
         guestControl={props.guestControl}
         setCheckIn={props.setCheckIn}
         setCheckOut={props.setCheckOut}
         mainPageInputChange={props.mainPageInputChange}
+        handleSearchSubmit={props.handleSearchSubmit}
       />
       <SecondBlock
-        second={props.second}
+        second={props.mainPage.second}
       />
       <ThirdBlock
-        third={props.third}
+        third={props.mainPage.third}
         mainPageEmailInputChange={props.mainPageEmailInputChange}
       />
     </div>
   )
 }
 
-const mapStateToProps = state => state.mainPage
+const mapStateToProps = state => state
 const mapDispatchToProps = {
   showGuest,
   hideGuest,
@@ -43,7 +45,8 @@ const mapDispatchToProps = {
   setCheckIn,
   setCheckOut,
   mainPageInputChange,
-  mainPageEmailInputChange
+  mainPageEmailInputChange,
+  handleSearchSubmit
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage)

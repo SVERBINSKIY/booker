@@ -4,27 +4,30 @@ import {
   handleAddHotel,
   handleInputChange,
   handleLoadCountry,
-  handleSelectCountry,
+  handleSelectCountry, handleSelectPropertyTypeChange,
 } from '../../redux/actions/representativeAction'
 
-const RepresentativeAddNewHotel = ({ representative,
-                                     handleInputChange,
-                                     handleLoadCountry,
-                                     handleSelectCountry,
-                                     handleAddHotel}) => {
+const RepresentativeAddNewHotel = (props) => {
+
   const formData = new FormData()
   useEffect(() => {
-    handleLoadCountry()
-  }, [handleLoadCountry])
+    props.handleLoadCountry()
+  }, [props.handleLoadCountry])
+
   const handleLocalInputChange = e => {
     const name = e.target.name
     const value = e.target.value
-    handleInputChange(name, value)
+    props.handleInputChange(name, value)
   }
   const handleSelectCountryChange = e => {
     const name = e.target.name
     const value = e.target.value
-    handleSelectCountry(name, value)
+    props.handleSelectCountry(name, value)
+  }
+  const handleSelectPropertyTypeChange = e => {
+    const name = e.target.name
+    const value = e.target.value
+    props.handleSelectPropertyTypeChange(name, value)
   }
   const handleFileChange = e => {
     const file = e.target.files[0]
@@ -32,15 +35,16 @@ const RepresentativeAddNewHotel = ({ representative,
   }
   const handleAddHotelClick = e => {
     e.preventDefault()
-    const form = representative.addHotel
+    const form = props.representative.addHotel
     formData.append('name', form.name)
     formData.append('country', form.country)
     formData.append('city', form.city)
+    formData.append('propertyType', form.propertyType)
     formData.append('stars', form.stars)
     formData.append('description', form.description)
     formData.append('minPrice', form.minPrice)
     formData.append('maxPrice', form.maxPrice)
-    handleAddHotel(formData)
+    props.handleAddHotel(formData)
   }
 
   return (
@@ -55,16 +59,24 @@ const RepresentativeAddNewHotel = ({ representative,
             type='text'
             name='name'
             onChange={handleLocalInputChange}
-            value={representative.addHotel.name} />
+            value={props.representative.addHotel.name} />
         </div>
         <div>
           <h3>Enter Country</h3>
-          <select onChange={handleSelectCountryChange} value={representative.addHotel.country} name='country'>
-            {representative.loadCountry.map(c => <option value={c._id} key={c._id}>{c.name}</option>)}
+          <select onChange={handleSelectCountryChange} value={props.representative.addHotel.country} name='country'>
+            {props.representative.loadCountry.map(c => <option value={c._id} key={c._id}>{c.name}</option>)}
           </select>
           <h3>Enter City</h3>
-          <select onChange={handleLocalInputChange} value={representative.addHotel.city} name='city'>
-            {representative.loadCity.map(c => <option value={c._id} key={c._id}>{c.name}</option>)}
+          <select onChange={handleLocalInputChange} value={props.representative.addHotel.city} name='city'>
+            {props.representative.loadCity.map(c => <option value={c._id} key={c._id}>{c.name}</option>)}
+          </select>
+        </div>
+        <div>
+          <h3>Property Type</h3>
+          <select name='propertyType' onChange={handleSelectPropertyTypeChange}>
+            <option value='0'></option>
+            <option value='hotel'>Отель</option>
+            <option value='apartments'>Аппартаменты</option>
           </select>
         </div>
         <div>
@@ -75,7 +87,7 @@ const RepresentativeAddNewHotel = ({ representative,
             max='5'
             min='0'
             onChange={handleLocalInputChange}
-            value={representative.addHotel.stars}
+            value={props.representative.addHotel.stars}
           />
         </div>
         <div>
@@ -83,7 +95,7 @@ const RepresentativeAddNewHotel = ({ representative,
           <textarea
             name='description'
             onChange={handleLocalInputChange}
-            value={representative.addHotel.description}
+            value={props.representative.addHotel.description}
           >
           </textarea>
         </div>
@@ -93,7 +105,7 @@ const RepresentativeAddNewHotel = ({ representative,
             type='text'
             name='minPrice'
             onChange={handleLocalInputChange}
-            value={representative.addHotel.minPrice}
+            value={props.representative.addHotel.minPrice}
           />
         </div>
         <div>
@@ -102,7 +114,7 @@ const RepresentativeAddNewHotel = ({ representative,
             type='text'
             name='maxPrice'
             onChange={handleLocalInputChange}
-            value={representative.addHotel.maxPrice}
+            value={props.representative.addHotel.maxPrice}
           />
         </div>
         <div>
@@ -120,7 +132,8 @@ const mapDispatchToProps = {
   handleInputChange,
   handleLoadCountry,
   handleSelectCountry,
-  handleAddHotel
+  handleAddHotel,
+  handleSelectPropertyTypeChange
 }
 
 export default connect(mapStateToProp, mapDispatchToProps)(RepresentativeAddNewHotel)

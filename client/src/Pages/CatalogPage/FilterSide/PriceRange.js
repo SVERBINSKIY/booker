@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import Slider from '@material-ui/core/Slider'
 
-export const PriceRange = ({ filterName }) => {
-  const [value, setValue] = useState([0, 500])
+export const PriceRange = ({ filterName, price, handlePriceRangeChange }) => {
+  const [value, setValue] = useState([price.min, price.max])
   const handleChange = (event, newValue) => {
     setValue(newValue)
+    handlePriceRangeChange(value[0], value[1])
   }
-
   return (
     <div className='price-range filter-side__filter-element'>
       <span className='filter-name'>{filterName}</span>
@@ -15,8 +15,8 @@ export const PriceRange = ({ filterName }) => {
       <Slider
         value={value}
         style={{color: '#72BE2E'}}
-        min={0}
-        max={500}
+        min={price.min}
+        max={price.max}
         onChange={handleChange}
         valueLabelDisplay='off'
         aria-labelledby='range-slider'

@@ -215,6 +215,41 @@
           float: right;
         }
       }
+      .property-type {
+        .checkbox {
+          margin: 15px 0;
+        }
+        .checkbox-spin {
+          display: none;
+        }
+        .checkbox-spin + label span{
+          display:inline-block;
+          width:25px;
+          height:19px;
+          margin: 0 5px -4px 0;
+          &:before,
+          &:after {
+            transition: all .3s ease-in-out;
+            content: "";
+            position: absolute;
+            z-index: 1;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border: 2px solid $border-color;
+          }
+          &:after {
+            z-index: 0;
+            border: none;
+          }
+        }
+        .checkbox-spin:checked + label span {
+          &:before {
+            transform: rotateZ(180deg);
+            background: $btn-hover;
+          }
+        }
+      }
     }
 
     .catalog__search-result-grid {

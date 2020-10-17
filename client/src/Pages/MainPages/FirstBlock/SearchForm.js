@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import 'react-day-picker/lib/style.css'
 
-export const SearchForm = ({ first, showGuest, hideGuest, guestControl, setCheckIn, setCheckOut, mainPageInputChange }) => {
-  const history = useHistory()
+export const SearchForm = ({ app, handleSearchSubmit, first, showGuest, hideGuest, guestControl, setCheckIn, setCheckOut, mainPageInputChange }) => {
   const [isGuest, setIsGuest] = useState(false)
 
   const handleSubmit = event => {
     event.preventDefault()
-    history.push('/catalog')
+    handleSearchSubmit(first)
+
   }
   const handleInput = event => {
     event.persist()

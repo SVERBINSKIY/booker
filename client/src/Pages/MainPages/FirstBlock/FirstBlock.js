@@ -9,12 +9,14 @@ export const FirstBlock = (props) => {
         <span className='second-text'>Explore the world with us</span>
         <SearchForm
           first={props.first}
+          app={props.app}
           hideGuest={props.hideGuest}
           showGuest={props.showGuest}
           guestControl={props.guestControl}
           setCheckIn={props.setCheckIn}
           setCheckOut={props.setCheckOut}
           mainPageInputChange={props.mainPageInputChange}
+          handleSearchSubmit={props.handleSearchSubmit}
         />
       </div>
     </section>
