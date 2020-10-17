@@ -4,13 +4,19 @@ import {
   REPRESENTATIVE_LOADING_HOTEL_BY_ID,
   REPRESENTATIVE_LOADING_HOTELS,
   REPRESENTATIVE_RESET_FORM,
-  REPRESENTATIVE_SELECT_COUNTRY_LOAD_CITY
+  REPRESENTATIVE_SELECT_COUNTRY_LOAD_CITY, REPRESENTATIVE_SELECT_PROPERTY_TYPE
 } from '../types'
 import { hideLoader, showLoader } from './appActions'
 
 export function handleInputChange(name, value) {
   return {
     type: REPRESENTATIVE_INPUT_CHANGE,
+    payload: {name, value}
+  }
+}
+export function handleSelectPropertyTypeChange(name, value) {
+  return {
+    type: REPRESENTATIVE_SELECT_PROPERTY_TYPE,
     payload: {name, value}
   }
 }
@@ -39,17 +45,23 @@ export function handleSelectCountry(name, value) {
     dispatch({ type: REPRESENTATIVE_SELECT_COUNTRY_LOAD_CITY, payload: {name, value, city: data.data} })
   }
 }
-export function handleAddHotel(form) {
+export function handleAddHotel(formData) {
   return async dispatch => {
-    const request = await fetch('/api/hotel/add', {
-      method: 'POST',
-      body: form
-    })
-    const data = await request.json()
-    console.log(data.message)
-    dispatch({ type: REPRESENTATIVE_RESET_FORM })
+    try {
+      const request = await fetch('/api/hotel/add', {
+        mode: 'no-cors',
+        method: 'POST',
+        body: formData
+      })
+      const data = await request.json()
+      console.log(data.message)
+      dispatch({type: REPRESENTATIVE_RESET_FORM})
+    } catch (e) {
+      console.log(`Error: ${e}`)
+    }
   }
 }
+
 export function handleLoadingHotels(id) {
   return async dispatch => {
     dispatch(showLoader())

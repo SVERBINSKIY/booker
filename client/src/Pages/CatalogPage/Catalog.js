@@ -1,46 +1,77 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { MenuComponent } from './SearchMenu/MenuComponent'
-import { FilterComponent } from './FilterSide/FilterComponent'
-import { SearchResult } from './SeacrhResult/SearchResultComponent'
-import { CatalogHeader } from './Header/CatalogHeader'
-import { catalogToGrid, catalogToList, handleGetAllHotels } from '../../redux/actions/catalogActions'
+import React, { useEffect } from "react"
+import { connect } from "react-redux"
+import { MenuComponent } from "./SearchMenu/MenuComponent"
+import { FilterComponent } from "./FilterSide/FilterComponent"
+import { SearchResult } from "./SeacrhResult/SearchResultComponent"
+import { CatalogHeader } from "./Header/CatalogHeader"
+import {
+  catalogToGrid,
+  catalogToList,
+  handleFilterHotel,
+  handleGetAllHotels,
+  handlePriceRangeChange,
+  handleSetPropertyTypeChange,
+} from "../../redux/actions/catalogActions"
 
-const Catalog = ({ app, catalog, catalogToGrid, catalogToList, handleGetAllHotels }) => {
+const Catalog = (props) => {
+  useEffect(() => {
+    if (!props.catalog.filteredHotel.length) {
+      props.handleGetAllHotels()
+    }
+  }, [props.handleGetAllHotels, props.catalog.filteredHotel])
 
   useEffect(() => {
-    handleGetAllHotels()
-  }, [handleGetAllHotels])
+    if (props.catalog.filtered) {
+      props.handleFilterHotel(
+        props.catalog.hotels,
+        props.catalog.filterSearch,
+        props.catalog.filterSide.propertyType
+      )
+    }
+  }, [
+    props.catalog.hotels,
+    props.catalog.filterSearch,
+    props.catalog.filterSide.propertyType,
+  ])
 
   return (
-    <div className='catalog'>
-      <div className='catalog__container'>
+    <div className="catalog">
+      <div className="catalog__container">
         <MenuComponent />
         <CatalogHeader
-          countFindHotels={catalog.hotels.length}
-          catalogLayout={catalog.catalogLayout}
-          catalogToGrid={catalogToGrid}
-          catalogToList={catalogToList}
+          countFindHotels={props.catalog.hotels.length}
+          catalogLayout={props.catalog.catalogLayout}
+          catalogToGrid={props.catalogToGrid}
+          catalogToList={props.catalogToList}
         />
-        <FilterComponent />
-         <SearchResult
-           loading={app.loading}
-           catalogLayout={catalog.catalogLayout}
-           hotelsData={catalog.hotels}
-         />
-
+        <FilterComponent
+          catalog={props.catalog}
+          loading={props.app.loading}
+          handlePriceRangeChange={props.handlePriceRangeChange}
+          handleSetPropertyTypeChange={props.handleSetPropertyTypeChange}
+        />
+        <SearchResult
+          loading={props.app.loading}
+          catalogLayout={props.catalog.catalogLayout}
+          hotelsData={
+            props.catalog.filteredHotel.length
+              ? props.catalog.filteredHotel
+              : props.catalog.hotels
+          }
+        />
       </div>
     </div>
   )
 }
 
-const mapStateToProps = state => {
-  return state
-}
+const mapStateToProps = (state) => state
 const mapDispatchToProps = {
   catalogToGrid,
   catalogToList,
-  handleGetAllHotels
+  handleGetAllHotels,
+  handlePriceRangeChange,
+  handleSetPropertyTypeChange,
+  handleFilterHotel,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Catalog)

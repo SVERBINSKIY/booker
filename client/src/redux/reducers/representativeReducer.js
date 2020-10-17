@@ -4,7 +4,7 @@ import {
   REPRESENTATIVE_LOADING_HOTEL_BY_ID,
   REPRESENTATIVE_LOADING_HOTELS,
   REPRESENTATIVE_RESET_FORM,
-  REPRESENTATIVE_SELECT_COUNTRY_LOAD_CITY
+  REPRESENTATIVE_SELECT_COUNTRY_LOAD_CITY, REPRESENTATIVE_SELECT_PROPERTY_TYPE
 } from '../types'
 
 const initialState = {
@@ -15,6 +15,7 @@ const initialState = {
     name: '',
     country: '',
     city: '',
+    propertyType: '',
     stars: 0,
     description: '',
     minPrice: 0,
@@ -48,6 +49,8 @@ export const representativeReducer = (state = initialState, action) => {
       return { ...state, managedHotels: action.payload }
     case REPRESENTATIVE_LOADING_HOTEL_BY_ID:
       return { ...state, selectedHotel: action.payload }
+    case REPRESENTATIVE_SELECT_PROPERTY_TYPE:
+      return { ...state, addHotel: {...state.addHotel, [action.payload.name]: action.payload.value} }
     default:
       return state
   }

@@ -7,13 +7,11 @@ const hotelSchema = new Schema({
     city: { type: Schema.Types.ObjectId, ref: 'City' }
   },
   stars: { type: Number, required: true, default: 0 },
+  propertyType: { type: String, required: true, default: 'hotel' },
   description: { type: String, required: false },
   minPrice: { type: Number, required: true },
   maxPrice: { type: Number, required: true },
   mainImg: { type: String, required: false },
-  imgArr: [
-    { type: String }
-  ],
   userId: { type: Schema.Types.ObjectId, ref: 'User' }
 })
 

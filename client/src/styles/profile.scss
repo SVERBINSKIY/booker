@@ -35,6 +35,10 @@
         font-weight: 500;
         color: $background-color;
         text-transform: uppercase;
+        transition: all 150ms ease-in-out 0s;
+        &:hover {
+          transform: scale(0.9, 0.9);
+        }
       }
     }
   }

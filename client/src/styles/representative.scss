@@ -19,7 +19,9 @@
         text-transform: uppercase;
         margin-bottom: 20px;
         font-weight: 400;
+        transition: all 150ms ease-in-out 0s;
         &:hover {
+          transform: scale(0.95, 0.95);
           background-color: $btn-hover;
           border-radius: 7px;
           color: $background-color;
@@ -50,12 +52,13 @@
       .info {
         position: relative;
         display: grid;
-        grid-template-columns: 30% 70%;
+        grid-template-columns: 50% 50%;
         grid-template-areas: "img cont";
         img {
           grid-area: img;
           height: 200px;
-          width: auto;
+          width: 300px;
+          margin: 10px 0;
           border-radius: 7px 0 0 7px;
         }
         .cont {
@@ -101,8 +104,9 @@
           font-weight: 400;
           color: $background-color;
           text-transform: uppercase;
-          transition: all 0.25s ease-in-out;
+          transition: all 150ms ease-in-out 0s;
           &:hover {
+            transform: scale(0.95, 0.95);
             background-color: $btn-hover;
           }
         }
@@ -142,6 +146,47 @@
     }
     select {
       border: 1px solid black;
+    }
+  }
+}
+.hotel__wrapper {
+  height: 100%;
+  width: 100%;
+  margin-top: 10px;
+  display: grid;
+  grid-template-rows: 70px 1fr;
+
+  &__header {
+    width: 100%;
+    height: 100%;
+    background-color: $primary-color;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    
+    &__name-hotel {
+      padding: 13px;
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+    &__control {
+      display: flex;
+      flex-direction: row-reverse;
+      .button {
+        height: 50px;
+        padding: 0 10px;
+        border-radius: 7px;
+        background-color: $secondary-color;
+        font-size: 16px;
+        font-weight: 500;
+        color: $background-color;
+        text-transform: uppercase;
+        transition: all 150ms ease-in-out 0s;
+        margin-left: 10px;
+        &:hover {
+          transform: scale(0.9, 0.9);
+        }
+      }
     }
   }
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { handleLoadingHotelById } from '../../redux/actions/representativeAction'
 import { Loader } from '../Loader'
+import RepresentativeHotelPageItem from './RepresentativeHotelPageItem'
 
 const RepresentativeHotelPage = ({ handleLoadingHotelById, app, representative }) => {
   const { id } = useParams()
@@ -10,7 +11,10 @@ const RepresentativeHotelPage = ({ handleLoadingHotelById, app, representative }
     handleLoadingHotelById(id)
   }, [handleLoadingHotelById, id])
   return (
-    app.loading ? <Loader/> : <h2>{representative.selectedHotel.name}</h2>
+    app.loading ? <Loader/> : <RepresentativeHotelPageItem 
+                                loading={app.loading}
+                                hotelData={representative.selectedHotel} 
+                              />
   )
 }
 

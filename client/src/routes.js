@@ -16,20 +16,21 @@ export const useRoutes = isAuth => {
         <Route path='/' component={MainPage} exact />
         <Route path='/catalog' component={Catalog} exact />
         <Route path='/profile' component={Profile} exact />
-        <Route path='/representative/main' component={RepresentativeMainPage} exact />
-        <Route path='/representative/add' component={RepresentativeAddNewHotel} exact />
+        <Route path='/representative/main' component={RepresentativeMainPage} />
+        <Route path='/representative/add' component={RepresentativeAddNewHotel} />
         <Route path='/representative/hotel/:id' component={RepresentativeHotelPage}/>
         <Redirect to='/' />
       </Switch>
     )
+  } else {
+      return (
+      <Switch>
+        <Route path='/' component={MainPage} exact />
+        <Route path='/catalog' component={Catalog} exact />
+        <Route path='/register' render={() => <RegisterPage />} exact />
+        <Route path='/login' render={() => <LoginPage />} exact />
+      </Switch>
+    )
   }
-  return (
-    <Switch>
-      <Route path='/' component={MainPage} exact />
-      <Route path='/catalog' component={Catalog} />
-      <Route path='/register' render={() => <RegisterPage />} exact />
-      <Route path='/login' render={() => <LoginPage />} />
-      <Redirect to='/' />
-    </Switch>
-  )
+  
 }
