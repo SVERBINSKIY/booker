@@ -36,6 +36,7 @@ app.use('/api/sign', require('./routes/auth.routes'))
 app.use('/api/country', require('./routes/country.routes'))
 app.use('/api/city', require('./routes/city.routes'))
 app.use('/api/hotel', require('./routes/hotel.routes'))
+app.use('/api/rooms', require('./routes/rooms.routes'))
 
 async function serverStart() {
   try {

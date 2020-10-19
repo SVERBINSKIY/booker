@@ -1,10 +1,16 @@
+import { determeningPeople } from '../../utils/determeningPeople.utils'
 import {
   REPRESENTATIVE_INPUT_CHANGE,
   REPRESENTATIVE_LOAD_COUNTRY,
   REPRESENTATIVE_LOADING_HOTEL_BY_ID,
   REPRESENTATIVE_LOADING_HOTELS,
   REPRESENTATIVE_RESET_FORM,
-  REPRESENTATIVE_SELECT_COUNTRY_LOAD_CITY, REPRESENTATIVE_SELECT_PROPERTY_TYPE
+  REPRESENTATIVE_SELECT_COUNTRY_LOAD_CITY, 
+  REPRESENTATIVE_SELECT_PROPERTY_TYPE, 
+  REPRESENTATIVE_CHECKBOX_CHANGE,
+  REPRESENTATIVE_CHECKBOX_CHANGE_SHARING,
+  REPRESENTATIVE_SELECT_CHANGE,
+  REPRESENTATIVE_SELECT_ACCOMMODATION
 } from '../types'
 import { hideLoader, showLoader } from './appActions'
 
@@ -87,5 +93,46 @@ export function handleLoadingHotelById(id) {
     const data = await request.json()
     dispatch({ type: REPRESENTATIVE_LOADING_HOTEL_BY_ID, payload: data.data })
     dispatch(hideLoader())
+  }
+}
+
+export function handleAddRoomInputChange(name, value) {
+  return dispatch => {
+    try {
+      if (name === 'accommodationType') {
+        const { adult, child, extraBed } = determeningPeople(value)
+        dispatch ({ type: REPRESENTATIVE_SELECT_ACCOMMODATION, payload: {adult, child, extraBed}})
+      }
+      dispatch({ type: REPRESENTATIVE_SELECT_CHANGE, payload: {name, value} })
+    } catch (e) {}
+  }
+}
+export function handleCheckboxInputChange(name) {
+  return dispatch => {
+    try {
+      if (name === 'children') {
+        dispatch ({ type: REPRESENTATIVE_CHECKBOX_CHANGE })
+      } else if (name === 'sharing') {
+        dispatch({ type: REPRESENTATIVE_CHECKBOX_CHANGE_SHARING })
+      }
+    } catch (e) {}
+  }
+}
+export function handleAddRoomSubmit(form) {
+  return async dispatch => {
+    try {
+      const body = JSON.stringify(form)
+      const request = await fetch('/api/rooms/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body
+      })
+      const data = await request.json()
+      console.log(data)
+    } catch (e) {
+      console.log(`Request error -> ${e}`)
+    }
   }
 }

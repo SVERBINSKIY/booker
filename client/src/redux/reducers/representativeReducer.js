@@ -4,7 +4,7 @@ import {
   REPRESENTATIVE_LOADING_HOTEL_BY_ID,
   REPRESENTATIVE_LOADING_HOTELS,
   REPRESENTATIVE_RESET_FORM,
-  REPRESENTATIVE_SELECT_COUNTRY_LOAD_CITY, REPRESENTATIVE_SELECT_PROPERTY_TYPE
+  REPRESENTATIVE_SELECT_COUNTRY_LOAD_CITY, REPRESENTATIVE_SELECT_PROPERTY_TYPE, REPRESENTATIVE_CHECKBOX_CHANGE, REPRESENTATIVE_CHECKBOX_CHANGE_SHARING, REPRESENTATIVE_SELECT_CHANGE, REPRESENTATIVE_SELECT_ACCOMMODATION
 } from '../types'
 
 const initialState = {
@@ -21,7 +21,18 @@ const initialState = {
     minPrice: 0,
     maxPrice: 0
   },
-  selectedHotel: {}
+  selectedHotel: {},
+  addRooms: {
+    children: false,
+    sharing: false,
+    roomType: '',
+    accommodationType: '',
+    determ: {},
+    description: '',
+    price: 0,
+    priceChildren: 0,
+    countRoom: 0
+  }
 }
 
 export const representativeReducer = (state = initialState, action) => {
@@ -51,6 +62,14 @@ export const representativeReducer = (state = initialState, action) => {
       return { ...state, selectedHotel: action.payload }
     case REPRESENTATIVE_SELECT_PROPERTY_TYPE:
       return { ...state, addHotel: {...state.addHotel, [action.payload.name]: action.payload.value} }
+    case REPRESENTATIVE_CHECKBOX_CHANGE:
+      return { ...state, addRooms: {...state.addRooms, children: !state.addRooms.children} }
+    case REPRESENTATIVE_CHECKBOX_CHANGE_SHARING:
+      return { ...state, addRooms: {...state.addRooms, sharing: !state.addRooms.sharing} }
+    case REPRESENTATIVE_SELECT_CHANGE:
+      return { ...state, addRooms: {...state.addRooms, [action.payload.name]: action.payload.value} }
+    case REPRESENTATIVE_SELECT_ACCOMMODATION: 
+      return { ...state, addRooms: {...state.addRooms, determ: action.payload} }
     default:
       return state
   }
