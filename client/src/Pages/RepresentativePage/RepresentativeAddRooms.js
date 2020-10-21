@@ -1,26 +1,39 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { handleAddRoomInputChange, handleCheckboxInputChange, handleAddRoomSubmit } from '../../redux/actions/representativeAction'
+import {
+  handleInputText,
+  handleInputNumber,
+  handleInputBedCount,
+  handleButtonAddRooms,
+} from '../../redux/actions/representativeAction'
+import { defenitionOfAccommodation } from '../../utils/defenitionOfAccommodation.utils'
 
 const RepresentativeAddRoms = (props) => {
   const { id } = useParams()
-  const handleCheckboxChange = e => {
+  const addRoomsForm = props.representative.addRooms
+
+  const handleInputTextChange = (e) => {
     e.persist()
-    props.handleCheckboxInputChange(e.target.name)
+    props.handleInputText(e.target.name, e.target.value)
   }
-  const handleSelectChange = e => {
+  const handleInputNumberChange = (e) => {
     e.persist()
-    const name = e.target.name
-    const value = e.target.value
-    props.handleAddRoomInputChange(name, value)
+    const value = +e.target.value
+    props.handleInputNumber(e.target.name, value)
   }
-  const handleAddRoomsClick = e => {
+  const handleInputBedCountChange = (e) => {
+    e.persist()
+    const value = +e.target.value
+    const candidateAccommodationTypes = defenitionOfAccommodation(value)
+    props.handleInputBedCount(e.target.name, value, candidateAccommodationTypes)
+  }
+  const handleButtonAddRoomsClick = (e) => {
     e.preventDefault()
-    const form = props.representative.addRooms
-    const hotelId = {hotelId: id}
-    const totalForm = Object.assign(form, hotelId)
-    props.handleAddRoomSubmit(totalForm)
+    const fetchForm = addRoomsForm
+    const hotelId = { hotelId: id }
+    const totalForm = Object.assign(fetchForm, hotelId)
+    props.handleButtonAddRooms(totalForm)
   }
 
   return (
@@ -28,35 +41,19 @@ const RepresentativeAddRoms = (props) => {
       <h2>Add rooms to hotel</h2>
       <div className='form'>
         <fieldset>
-          <legend><h5>Configuration Room</h5></legend>
-
-          <input 
-            type='checkbox' 
-            name='children' 
-            id='children' 
-            className="check"
-            checked={props.representative.addRooms.children}
-            value={props.representative.addRooms.children}
-            onChange={handleCheckboxChange}
-            disabled={props.representative.addRooms.sharing ? true : false}
-          /><label htmlFor='children'>Children</label><br />
-
-          <input 
-            type='checkbox' 
-            name='sharing' 
-            id='sharing' 
-            className="check" 
-            checked={props.representative.addRooms.sharing}
-            value={props.representative.addRooms.sharing}
-            onChange={handleCheckboxChange}
-            disabled={props.representative.addRooms.children ? true : false}
-          /><label htmlFor='sharing'>Sharing</label><br />
-
+          <legend>
+            <h5>Configuration Room</h5>
+          </legend>
           <label htmlFor='roomType'>Type</label>
           <br />
-          <select name='roomType' id='roomType' className="select" onChange={handleSelectChange}>
+          <select
+            name='roomType'
+            id='roomType'
+            className='select'
+            onChange={handleInputTextChange}
+          >
             <optgroup label='All'>
-              <option value="null">Select Room Type</option>
+              <option value='null'>Select Room Type</option>
               <option value='apartment'>Apartment</option>
               <option value='balcony'>Balcony</option>
               <option value='delux'>Delux</option>
@@ -74,84 +71,105 @@ const RepresentativeAddRoms = (props) => {
             </optgroup>
           </select>
           <br />
-
-          <label htmlFor='accommodation'>Accommodation</label>
+          <label htmlFor='bedCount'>Bed Count</label>
           <br />
-          <select name='accommodationType' id='accommodation' className="select" onChange={handleSelectChange}>
-            <optgroup label='Without Sharing'>
-              <option value="null">Select Accommodation Type</option>
-              <option value='sgl'>Single</option>
-              <option value='dbl'>Double</option>
-              <option value='trpl'>Triple</option>
-            </optgroup>
-            <optgroup label='With Sharing'>
-              <option value='dblShr'>Double</option>
-              <option value='trpShr'>Triple</option>
-            </optgroup>
-            <optgroup label='With Children'>
-              <option value='sglChld'>Single + Children</option>
-              <option value='dblChld'>Double + Children</option>
-              <option value='dblExpChld'>Double + Bad + Children</option>
-              <option value='sgl2Chld'>Single + 2 Children</option>
-              <option value='dbl2Chld'>Double + 2 Children</option>
-              <option value='trp2Chld'>Triple + 2 Children</option>
-            </optgroup>
-          </select>
+          <input
+            type='number'
+            name='bedCount'
+            id='bedCount'
+            min='1'
+            max='5'
+            className='price'
+            value={addRoomsForm.bedCount}
+            onChange={handleInputBedCountChange}
+          />
           <br />
+          <div
+            style={
+              addRoomsForm.accommodationTypes.length === 0
+                ? { display: 'none' }
+                : { display: 'flex' }
+            }
+            className='generate-accommodation'
+          >
+            {addRoomsForm.accommodationTypes.length !== 0
+              ? addRoomsForm.accommodationTypes.map((type) => (
+                  <div key={type.type} className='generate-accommodation__type'>
+                    <span>{type.type}</span> <br />
+                    Adult: {type.adult} <br />
+                    Children: {type.child} <br />
+                    Total: {type.totalBedCount}
+                  </div>
+                ))
+              : ''}
+          </div>
         </fieldset>
         <fieldset>
-          <legend><h5>Description Room</h5></legend>
+          <legend>
+            <h5>Description Room</h5>
+          </legend>
           <label htmlFor='descriptionRoom'>Description Room</label>
+          <br />
           <textarea
             name='description'
             id='descriptionRoom'
             cols='30'
             rows='3'
-            value={props.representative.addRooms.description}
-            onChange={handleSelectChange}
+            value={addRoomsForm.description}
+            onChange={handleInputTextChange}
           ></textarea>
-          <label htmlFor="priceRoom">Price Adults</label>
-          <input 
-            type="number" 
-            name="price" 
-            id="priceRoom" 
-            className="price"
-            value={props.representative.addRooms.price}
-            onChange={handleSelectChange}
+          <br />
+          <label htmlFor='priceRoom'>Price Adults</label>
+          <br />
+          <input
+            type='number'
+            name='priceAdults'
+            id='priceRoom'
+            className='price'
+            value={addRoomsForm.priceAdults}
+            onChange={handleInputNumberChange}
           />
-          {props.representative.addRooms.children ? <label htmlFor="priceRoomChildren">Price Children</label> : ''}
-          <input 
-            type={props.representative.addRooms.children ? "number" : "hidden"} 
-            name="priceChildren" 
-            id="priceChildren" 
-            className="price"
-            value={props.representative.addRooms.priceChildren} 
-            onChange={handleSelectChange}  
+          <br />
+          <label htmlFor='priceRoomChildren'>Price Children</label>
+          <br />
+          <input
+            type='number'
+            name='priceChildren'
+            id='priceChildren'
+            className='price'
+            value={addRoomsForm.priceChildren}
+            onChange={handleInputNumberChange}
           />
         </fieldset>
         <fieldset>
           <legend>Count Genegare Room</legend>
-          <label htmlFor="count">Count Room</label>
-          <input 
-            type="text" 
-            name="countRoom" 
-            id="count" 
-            className="input" 
-            value={props.representative.addRooms.countRoom}
-            onChange={handleSelectChange}
+          <label htmlFor='count'>Count Room</label>
+          <input
+            type='number'
+            name='countRoom'
+            id='count'
+            className='price'
+            value={addRoomsForm.countRoom}
+            onChange={handleInputNumberChange}
           />
         </fieldset>
-        <button className="button" onClick={handleAddRoomsClick}>Add Rooms</button>
+        <button className='button' onClick={handleButtonAddRoomsClick}>
+          Add Rooms
+        </button>
       </div>
     </div>
   )
 }
 
-const mapStateToProps = state => state
+const mapStateToProps = (state) => state
 const mapDispatchToProps = {
-  handleAddRoomInputChange,
-  handleCheckboxInputChange,
-  handleAddRoomSubmit
+  handleInputText,
+  handleInputNumber,
+  handleInputBedCount,
+  handleButtonAddRooms,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RepresentativeAddRoms)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RepresentativeAddRoms)

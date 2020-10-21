@@ -8,19 +8,22 @@ const RepresentativeHotelPageItem = (props) => {
 
   useEffect(() => {
     setLocation(props.loading ? 'loading' : props.hotelData.location)
-  }, [setLocation])
+  }, [props.loading, props.hotelData.location])
   const handleToAddRoomClick = () => {
     history.push(`/representative/add-room/${props.hotelData._id}`)
   }
-  
-  return (
-    props.loading ? <Loader/> : <div className='hotel__wrapper'>
+
+  return props.loading ? (
+    <Loader />
+  ) : (
+    <div className='hotel__wrapper'>
       <div className='hotel__wrapper__header'>
         <div className='hotel__wrapper__header__name-hotel'>
           <h2>
-            {props.hotelData.name} / 
+            {props.hotelData.name} /
             <span className='hotel__wrapper__header__name-hotel__location'>
-              {location.country ? location.country.name: ''} - {location.city ? location.city.name : ''}
+              {location.country ? location.country.name : ''} -{' '}
+              {location.city ? location.city.name : ''}
             </span>
           </h2>
         </div>

@@ -5,7 +5,7 @@ import { Header } from './Components/Header'
 import { useRoutes } from './routes'
 import { checkLogin } from './redux/actions/loginPageAction'
 
-const App = ({ login, checkLogin }) => {
+const Booker = ({ login, checkLogin }) => {
   useEffect(() => {
     checkLogin()
   }, [checkLogin])
@@ -15,15 +15,15 @@ const App = ({ login, checkLogin }) => {
     <BrowserRouter>
       <div className='wrapper'>
         <Header login={login.isAuth} />
-        { routes }
+        {routes}
       </div>
     </BrowserRouter>
   )
 }
 
-const mapStateToProps = state => state
+const mapStateToProps = (state) => state
 const mapDispatchToProps = {
-  checkLogin
+  checkLogin,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(Booker)

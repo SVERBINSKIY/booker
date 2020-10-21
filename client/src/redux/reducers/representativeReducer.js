@@ -4,7 +4,12 @@ import {
   REPRESENTATIVE_LOADING_HOTEL_BY_ID,
   REPRESENTATIVE_LOADING_HOTELS,
   REPRESENTATIVE_RESET_FORM,
-  REPRESENTATIVE_SELECT_COUNTRY_LOAD_CITY, REPRESENTATIVE_SELECT_PROPERTY_TYPE, REPRESENTATIVE_CHECKBOX_CHANGE, REPRESENTATIVE_CHECKBOX_CHANGE_SHARING, REPRESENTATIVE_SELECT_CHANGE, REPRESENTATIVE_SELECT_ACCOMMODATION
+  REPRESENTATIVE_SELECT_COUNTRY_LOAD_CITY,
+  REPRESENTATIVE_SELECT_PROPERTY_TYPE,
+  REPRESENTATIVE_INPUT_TEXT_CHANGE,
+  REPRESENTATIVE_INPUT_NUMBER_CHANGE,
+  REPRESENTATIVE_INPUT_BED_COUNT_CHANGE,
+  REPRESENTATIVE_CLEAR_FORM_ADD_ROOMS,
 } from '../types'
 
 const initialState = {
@@ -19,57 +24,105 @@ const initialState = {
     stars: 0,
     description: '',
     minPrice: 0,
-    maxPrice: 0
+    maxPrice: 0,
   },
   selectedHotel: {},
   addRooms: {
-    children: false,
-    sharing: false,
     roomType: '',
-    accommodationType: '',
-    determ: {},
+    bedCount: 0,
+    accommodationTypes: [],
     description: '',
-    price: 0,
+    priceAdults: 0,
     priceChildren: 0,
-    countRoom: 0
-  }
+    countRoom: 0,
+  },
 }
 
 export const representativeReducer = (state = initialState, action) => {
   switch (action.type) {
     case REPRESENTATIVE_INPUT_CHANGE:
-      return { ...state, addHotel: { ...state.addHotel, [action.payload.name]: action.payload.value } }
+      return {
+        ...state,
+        addHotel: {
+          ...state.addHotel,
+          [action.payload.name]: action.payload.value,
+        },
+      }
     case REPRESENTATIVE_LOAD_COUNTRY:
-      return { ...state, loadCountry:  action.payload}
+      return { ...state, loadCountry: action.payload }
     case REPRESENTATIVE_SELECT_COUNTRY_LOAD_CITY:
       return {
         ...state,
         addHotel: {
-          ...state.addHotel, [action.payload.name]: action.payload.value
+          ...state.addHotel,
+          [action.payload.name]: action.payload.value,
         },
-        loadCity: action.payload.city
+        loadCity: action.payload.city,
       }
     case REPRESENTATIVE_RESET_FORM:
       return {
         ...state,
         addHotel: {
-          ...state.addHotel, name: '', description: '', minPrice: 0, stars: 0, maxPrice: 0, country: '', city: ''
-        }
+          ...state.addHotel,
+          name: '',
+          description: '',
+          minPrice: 0,
+          stars: 0,
+          maxPrice: 0,
+          country: '',
+          city: '',
+        },
       }
     case REPRESENTATIVE_LOADING_HOTELS:
       return { ...state, managedHotels: action.payload }
     case REPRESENTATIVE_LOADING_HOTEL_BY_ID:
       return { ...state, selectedHotel: action.payload }
     case REPRESENTATIVE_SELECT_PROPERTY_TYPE:
-      return { ...state, addHotel: {...state.addHotel, [action.payload.name]: action.payload.value} }
-    case REPRESENTATIVE_CHECKBOX_CHANGE:
-      return { ...state, addRooms: {...state.addRooms, children: !state.addRooms.children} }
-    case REPRESENTATIVE_CHECKBOX_CHANGE_SHARING:
-      return { ...state, addRooms: {...state.addRooms, sharing: !state.addRooms.sharing} }
-    case REPRESENTATIVE_SELECT_CHANGE:
-      return { ...state, addRooms: {...state.addRooms, [action.payload.name]: action.payload.value} }
-    case REPRESENTATIVE_SELECT_ACCOMMODATION: 
-      return { ...state, addRooms: {...state.addRooms, determ: action.payload} }
+      return {
+        ...state,
+        addHotel: {
+          ...state.addHotel,
+          [action.payload.name]: action.payload.value,
+        },
+      }
+    case REPRESENTATIVE_INPUT_TEXT_CHANGE:
+      return {
+        ...state,
+        addRooms: {
+          ...state.addRooms,
+          [action.payload.name]: action.payload.value,
+        },
+      }
+    case REPRESENTATIVE_INPUT_NUMBER_CHANGE:
+      return {
+        ...state,
+        addRooms: {
+          ...state.addRooms,
+          [action.payload.name]: action.payload.value,
+        },
+      }
+    case REPRESENTATIVE_INPUT_BED_COUNT_CHANGE:
+      return {
+        ...state,
+        addRooms: {
+          ...state.addRooms,
+          accommodationTypes: action.payload.accommodationTypes,
+          [action.payload.name]: action.payload.value,
+        },
+      }
+    case REPRESENTATIVE_CLEAR_FORM_ADD_ROOMS:
+      return {
+        ...state,
+        addRooms: {
+          roomType: '',
+          bedCount: 0,
+          accommodationTypes: [],
+          description: '',
+          priceAdults: 0,
+          priceChildren: 0,
+          countRoom: 0,
+        },
+      }
     default:
       return state
   }

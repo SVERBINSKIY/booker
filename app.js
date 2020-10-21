@@ -12,21 +12,23 @@ const app = express()
 const PORT = config.get('PORT') || 3001
 const store = new MongoStore({
   collection: 'sessions',
-  uri: config.get('mongoUri')
+  uri: config.get('mongoUri'),
 })
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use(session({
-  secret: config.get('sessionSecretKey'),
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24
-  },
-  resave: true,
-  saveUninitialized: true,
-  store
-}))
+app.use(
+  session({
+    secret: config.get('sessionSecretKey'),
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+    resave: true,
+    saveUninitialized: true,
+    store,
+  })
+)
 
 app.use(varMiddleware)
 app.use(userMiddleware)
@@ -43,7 +45,7 @@ async function serverStart() {
     await mongoose.connect(config.get('mongoUri'), {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useFindAndModify: false
+      useFindAndModify: false,
     })
     app.listen(PORT, () => {
       console.log(`Server ha been started on localhost:${PORT}`)
