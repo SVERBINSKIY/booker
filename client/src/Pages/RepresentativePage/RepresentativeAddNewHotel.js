@@ -4,36 +4,37 @@ import {
   handleAddHotel,
   handleInputChange,
   handleLoadCountry,
-  handleSelectCountry, handleSelectPropertyTypeChange,
+  handleSelectCountry,
+  handleSelectPropertyTypeChange,
 } from '../../redux/actions/representativeAction'
 
 const RepresentativeAddNewHotel = (props) => {
-
   const formData = new FormData()
+  const { handleLoadCountry } = props
   useEffect(() => {
-    props.handleLoadCountry()
-  }, [props.handleLoadCountry])
+    handleLoadCountry()
+  }, [handleLoadCountry])
 
-  const handleLocalInputChange = e => {
+  const handleLocalInputChange = (e) => {
     const name = e.target.name
     const value = e.target.value
     props.handleInputChange(name, value)
   }
-  const handleSelectCountryChange = e => {
+  const handleSelectCountryChange = (e) => {
     const name = e.target.name
     const value = e.target.value
     props.handleSelectCountry(name, value)
   }
-  const handleSelectPropertyTypeChange = e => {
+  const handleSelectPropertyTypeChange = (e) => {
     const name = e.target.name
     const value = e.target.value
     props.handleSelectPropertyTypeChange(name, value)
   }
-  const handleFileChange = e => {
+  const handleFileChange = (e) => {
     const file = e.target.files[0]
     formData.append('file', file)
   }
-  const handleAddHotelClick = e => {
+  const handleAddHotelClick = (e) => {
     e.preventDefault()
     const form = props.representative.addHotel
     formData.append('name', form.name)
@@ -59,16 +60,33 @@ const RepresentativeAddNewHotel = (props) => {
             type='text'
             name='name'
             onChange={handleLocalInputChange}
-            value={props.representative.addHotel.name} />
+            value={props.representative.addHotel.name}
+          />
         </div>
         <div>
           <h3>Enter Country</h3>
-          <select onChange={handleSelectCountryChange} value={props.representative.addHotel.country} name='country'>
-            {props.representative.loadCountry.map(c => <option value={c._id} key={c._id}>{c.name}</option>)}
+          <select
+            onChange={handleSelectCountryChange}
+            value={props.representative.addHotel.country}
+            name='country'
+          >
+            {props.representative.loadCountry.map((c) => (
+              <option value={c._id} key={c._id}>
+                {c.name}
+              </option>
+            ))}
           </select>
           <h3>Enter City</h3>
-          <select onChange={handleLocalInputChange} value={props.representative.addHotel.city} name='city'>
-            {props.representative.loadCity.map(c => <option value={c._id} key={c._id}>{c.name}</option>)}
+          <select
+            onChange={handleLocalInputChange}
+            value={props.representative.addHotel.city}
+            name='city'
+          >
+            {props.representative.loadCity.map((c) => (
+              <option value={c._id} key={c._id}>
+                {c.name}
+              </option>
+            ))}
           </select>
         </div>
         <div>
@@ -96,8 +114,7 @@ const RepresentativeAddNewHotel = (props) => {
             name='description'
             onChange={handleLocalInputChange}
             value={props.representative.addHotel.description}
-          >
-          </textarea>
+          ></textarea>
         </div>
         <div>
           <h3>Min Price</h3>
@@ -127,13 +144,16 @@ const RepresentativeAddNewHotel = (props) => {
   )
 }
 
-const mapStateToProp = state => state
+const mapStateToProp = (state) => state
 const mapDispatchToProps = {
   handleInputChange,
   handleLoadCountry,
   handleSelectCountry,
   handleAddHotel,
-  handleSelectPropertyTypeChange
+  handleSelectPropertyTypeChange,
 }
 
-export default connect(mapStateToProp, mapDispatchToProps)(RepresentativeAddNewHotel)
+export default connect(
+  mapStateToProp,
+  mapDispatchToProps
+)(RepresentativeAddNewHotel)

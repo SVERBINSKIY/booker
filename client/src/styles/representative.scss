@@ -4,7 +4,7 @@
   margin-top: 10px;
   display: grid;
   grid-template-columns: 300px 1fr;
-  grid-template-areas: "r_navbar r_content";
+  grid-template-areas: 'r_navbar r_content';
   &__navbar {
     grid-area: r_navbar;
     margin-top: 20px;
@@ -53,7 +53,7 @@
         position: relative;
         display: grid;
         grid-template-columns: 50% 50%;
-        grid-template-areas: "img cont";
+        grid-template-areas: 'img cont';
         img {
           grid-area: img;
           height: 200px;
@@ -89,7 +89,6 @@
             font-weight: 400;
           }
         }
-
       }
       .panel {
         border-left: 1px solid $border-color;
@@ -128,7 +127,7 @@
     }
   }
 }
-.add-hotel  {
+.add-hotel {
   width: 100%;
   height: 100%;
   display: grid;
@@ -163,11 +162,16 @@
     padding: 10px;
     display: grid;
     grid-template-columns: repeat(2, 50%);
-    
+
     &__name-hotel {
       padding: 13px;
       font-size: 24px;
       text-transform: uppercase;
+
+      &__location {
+        font-size: 16px;
+        color: $text-secondary-color;
+      }
     }
     &__control {
       display: flex;
@@ -187,6 +191,109 @@
           transform: scale(0.9, 0.9);
         }
       }
+    }
+  }
+}
+.add-room__wrapper {
+  width: 600px;
+  height: 100%;
+  margin: 10px auto;
+
+  .generate-accommodation {
+    width: 100%;
+    height: 90px;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+
+    &__type {
+      width: 130px;
+      height: 70px;
+      border: 1px solid $border-color;
+      border-radius: 7px;
+      font-size: 14px;
+      padding: 5px 10px;
+      font-weight: 400;
+
+      span {
+        font-weight: 500;
+      }
+    }
+  }
+
+  h2 {
+    font-size: 26px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+  }
+
+  fieldset {
+    border: 1px solid $border-color;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 7px;
+
+    h5 {
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .check {
+      display: inline-block;
+      border: 1px solid $border-color;
+      margin: 0 10px 20px 0px;
+    }
+
+    .select {
+      border: 1px solid $border-color;
+      height: 30px;
+      margin: 10px 0;
+      padding: 0 10px;
+      border-radius: 7px;
+    }
+
+    textarea {
+      border: 1px solid $border-color;
+      width: 400px;
+      height: 70px;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 7px;
+      resize: none;
+    }
+
+    .input {
+      border: 1px solid $border-color;
+      height: 30px;
+      width: 400px;
+      font-size: 14px;
+      margin: 10px 0;
+      padding: 0 10px;
+      border-radius: 7px;
+    }
+    .price {
+      border: 1px solid $border-color;
+      height: 30px;
+      width: 200px;
+      font-size: 14px;
+      margin: 10px 0;
+      padding: 0 10px;
+      border-radius: 7px;
+      margin-right: 10px;
+    }
+  }
+  .button {
+    width: 100%;
+    height: 50px;
+    border-radius: 7px;
+    background-color: $btn-hover;
+    font-size: 16px;
+    font-weight: 500;
+    color: $background-color;
+    text-transform: uppercase;
+    transition: all 150ms ease-in-out 0s;
+    &:hover {
+      transform: scale(0.9, 0.9);
     }
   }
 }
