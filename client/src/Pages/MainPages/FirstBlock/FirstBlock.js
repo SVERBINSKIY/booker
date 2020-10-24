@@ -16,7 +16,7 @@ export const FirstBlock = (props) => {
           setCheckIn={props.setCheckIn}
           setCheckOut={props.setCheckOut}
           mainPageInputChange={props.mainPageInputChange}
-          handleSearchSubmit={props.handleSearchSubmit}
+          handleButtonSearch={props.handleButtonSearch}
         />
       </div>
     </section>

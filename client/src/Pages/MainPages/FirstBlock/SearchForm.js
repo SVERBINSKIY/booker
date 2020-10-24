@@ -10,13 +10,10 @@ export const SearchForm = ({
   setCheckIn,
   setCheckOut,
   mainPageInputChange,
+  handleButtonSearch,
 }) => {
   const [isGuest, setIsGuest] = useState(false)
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log(first)
-  }
   const handleInput = (event) => {
     event.persist()
     mainPageInputChange(event.target.name, event.target.value)
@@ -30,9 +27,13 @@ export const SearchForm = ({
       hideGuest()
     }
   }
+  const handleButtonSearchClick = (e) => {
+    e.preventDefault()
+    handleButtonSearch(first)
+  }
 
   return (
-    <form className='form' onSubmit={handleSubmit}>
+    <form className='form' onSubmit={handleButtonSearchClick}>
       <div className='where'>
         <span className='form-title'>Where</span>
         <input
