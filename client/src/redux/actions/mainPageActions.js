@@ -89,7 +89,14 @@ export function handleButtonSearch(form) {
         body,
       })
       const data = await request.json()
-      console.log(data)
+      console.log(data.data.hotels)
+      const { min, max } = searchMinMax(data.data.hotels)
+      console.log(min, max)
+      dispatch({
+        type: CATALOG_FROM_MAIN_PAGE,
+        payload: { hotels: data.data.hotels, price: { min, max } },
+      })
+      dispatch(hideLoader())
     } catch (e) {}
     console.log(where, rooms, adults, children)
   }

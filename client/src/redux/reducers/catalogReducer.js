@@ -6,12 +6,14 @@ import {
   CATALOG_TO_GRID,
   CATALOG_TO_LIST,
   CATALOG_FILTER_HOTEL,
-} from "../types"
+  CATALOG_FROM_MAIN_PAGE,
+} from '../types'
 
 const initialState = {
-  catalogLayout: "grid",
+  fromMainPage: false,
+  catalogLayout: 'grid',
   countFindHotels: 0,
-  sort: "toLower",
+  sort: 'toLower',
   hotels: [],
   filterSide: {
     price: { min: 0, max: 250 },
@@ -33,7 +35,7 @@ export const catalogReducer = (state = initialState, action) => {
         ...state,
         hotels: action.payload.hotels,
         filterSide: { ...state.filterSide, price: action.payload.price },
-        filterSearch: { ...state.filterSide, price: action.payload.price }
+        filterSearch: { ...state.filterSide, price: action.payload.price },
       }
 
     case CATALOG_CHANGE_PRICE_RANGE:
@@ -68,6 +70,14 @@ export const catalogReducer = (state = initialState, action) => {
       }
     case CATALOG_FILTER_HOTEL:
       return { ...state, filteredHotel: action.payload.hotels }
+    case CATALOG_FROM_MAIN_PAGE:
+      return {
+        ...state,
+        fromMainPage: true,
+        hotels: action.payload.hotels,
+        filterSide: { ...state.filterSide, price: action.payload.price },
+        filterSearch: { ...state.filterSide, price: action.payload.price },
+      }
 
     default:
       return state

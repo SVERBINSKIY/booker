@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import 'react-day-picker/lib/style.css'
 
@@ -12,6 +13,7 @@ export const SearchForm = ({
   mainPageInputChange,
   handleButtonSearch,
 }) => {
+  const history = useHistory()
   const [isGuest, setIsGuest] = useState(false)
 
   const handleInput = (event) => {
@@ -30,6 +32,7 @@ export const SearchForm = ({
   const handleButtonSearchClick = (e) => {
     e.preventDefault()
     handleButtonSearch(first)
+    history.push('/catalog')
   }
 
   return (
