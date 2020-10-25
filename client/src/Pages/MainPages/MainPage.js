@@ -4,12 +4,14 @@ import { FirstBlock } from './FirstBlock/FirstBlock'
 import { SecondBlock } from './SecondBlock/SecondBlock'
 import { ThirdBlock } from './ThirdBlock/ThirdBlock'
 import {
-  guestControl, handleSearchSubmit,
-  hideGuest, mainPageEmailInputChange,
+  guestControl,
+  hideGuest,
+  mainPageEmailInputChange,
   mainPageInputChange,
   setCheckIn,
   setCheckOut,
-  showGuest
+  showGuest,
+  handleButtonSearch,
 } from '../../redux/actions/mainPageActions'
 
 const MainPage = (props) => {
@@ -24,11 +26,9 @@ const MainPage = (props) => {
         setCheckIn={props.setCheckIn}
         setCheckOut={props.setCheckOut}
         mainPageInputChange={props.mainPageInputChange}
-        handleSearchSubmit={props.handleSearchSubmit}
+        handleButtonSearch={props.handleButtonSearch}
       />
-      <SecondBlock
-        second={props.mainPage.second}
-      />
+      <SecondBlock second={props.mainPage.second} />
       <ThirdBlock
         third={props.mainPage.third}
         mainPageEmailInputChange={props.mainPageEmailInputChange}
@@ -37,7 +37,7 @@ const MainPage = (props) => {
   )
 }
 
-const mapStateToProps = state => state
+const mapStateToProps = (state) => state
 const mapDispatchToProps = {
   showGuest,
   hideGuest,
@@ -46,7 +46,7 @@ const mapDispatchToProps = {
   setCheckOut,
   mainPageInputChange,
   mainPageEmailInputChange,
-  handleSearchSubmit
+  handleButtonSearch,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage)

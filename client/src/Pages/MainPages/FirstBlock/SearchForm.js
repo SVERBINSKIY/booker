@@ -1,16 +1,22 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import 'react-day-picker/lib/style.css'
 
-export const SearchForm = ({ app, handleSearchSubmit, first, showGuest, hideGuest, guestControl, setCheckIn, setCheckOut, mainPageInputChange }) => {
+export const SearchForm = ({
+  first,
+  showGuest,
+  hideGuest,
+  guestControl,
+  setCheckIn,
+  setCheckOut,
+  mainPageInputChange,
+  handleButtonSearch,
+}) => {
+  const history = useHistory()
   const [isGuest, setIsGuest] = useState(false)
 
-  const handleSubmit = event => {
-    event.preventDefault()
-    handleSearchSubmit(first)
-
-  }
-  const handleInput = event => {
+  const handleInput = (event) => {
     event.persist()
     mainPageInputChange(event.target.name, event.target.value)
   }
@@ -23,9 +29,14 @@ export const SearchForm = ({ app, handleSearchSubmit, first, showGuest, hideGues
       hideGuest()
     }
   }
+  const handleButtonSearchClick = (e) => {
+    e.preventDefault()
+    handleButtonSearch(first)
+    history.push('/catalog')
+  }
 
   return (
-    <form className='form' onSubmit={handleSubmit}>
+    <form className='form' onSubmit={handleButtonSearchClick}>
       <div className='where'>
         <span className='form-title'>Where</span>
         <input
@@ -41,7 +52,9 @@ export const SearchForm = ({ app, handleSearchSubmit, first, showGuest, hideGues
         <span className='form-title'>Check In</span>
         <div className='form-input'>
           <DayPickerInput
-            onDayChange={day => {setCheckIn(day)}}
+            onDayChange={(day) => {
+              setCheckIn(day)
+            }}
           />
         </div>
       </div>
@@ -49,13 +62,20 @@ export const SearchForm = ({ app, handleSearchSubmit, first, showGuest, hideGues
         <span className='form-title'>Check Out</span>
         <div className='form-input'>
           <DayPickerInput
-            onDayChange={day => {setCheckOut(day)}}
+            onDayChange={(day) => {
+              setCheckOut(day)
+            }}
           />
         </div>
       </div>
       <div className='guest'>
         <span className='form-title'>Guests</span>
-        <input type='text' placeholder="Who's going?" className='form-input' onClick={handleGuestClick}/>
+        <input
+          type='text'
+          placeholder="Who's going?"
+          className='form-input'
+          onClick={handleGuestClick}
+        />
         <div className={`guestSection-${first.guests}`}>
           <div className='guestSection__item'>
             <div className='info'>
@@ -63,7 +83,12 @@ export const SearchForm = ({ app, handleSearchSubmit, first, showGuest, hideGues
               <p className='sub-title'>Min 1 Room</p>
             </div>
             <div className='counter'>
-              <i className="fa fa-minus btn-counter" onClick={() => {guestControl('room', '-')}}></i>
+              <i
+                className='fa fa-minus btn-counter'
+                onClick={() => {
+                  guestControl('room', '-')
+                }}
+              ></i>
               <input
                 type='text'
                 name='rooms'
@@ -72,7 +97,12 @@ export const SearchForm = ({ app, handleSearchSubmit, first, showGuest, hideGues
                 value={first.rooms}
                 readOnly
               />
-              <i className="fa fa-plus btn-counter" onClick={() => {guestControl('room', '+')}}></i>
+              <i
+                className='fa fa-plus btn-counter'
+                onClick={() => {
+                  guestControl('room', '+')
+                }}
+              ></i>
             </div>
           </div>
           <div className='guestSection__item'>
@@ -81,7 +111,12 @@ export const SearchForm = ({ app, handleSearchSubmit, first, showGuest, hideGues
               <p className='sub-title'>18 And Older</p>
             </div>
             <div className='counter'>
-              <i className="fa fa-minus btn-counter"  onClick={() => {guestControl('adult', '-')}}></i>
+              <i
+                className='fa fa-minus btn-counter'
+                onClick={() => {
+                  guestControl('adult', '-')
+                }}
+              ></i>
               <input
                 type='text'
                 name='adults'
@@ -90,7 +125,12 @@ export const SearchForm = ({ app, handleSearchSubmit, first, showGuest, hideGues
                 value={first.adults}
                 readOnly
               />
-              <i className="fa fa-plus btn-counter" onClick={() => {guestControl('adult', '+')}}></i>
+              <i
+                className='fa fa-plus btn-counter'
+                onClick={() => {
+                  guestControl('adult', '+')
+                }}
+              ></i>
             </div>
           </div>
           <div className='guestSection__item'>
@@ -99,7 +139,12 @@ export const SearchForm = ({ app, handleSearchSubmit, first, showGuest, hideGues
               <p className='sub-title'>Ages 2-18</p>
             </div>
             <div className='counter'>
-              <i className="fa fa-minus btn-counter" onClick={() => {guestControl('children', '-')}}></i>
+              <i
+                className='fa fa-minus btn-counter'
+                onClick={() => {
+                  guestControl('children', '-')
+                }}
+              ></i>
               <input
                 type='text'
                 name='children'
@@ -108,13 +153,20 @@ export const SearchForm = ({ app, handleSearchSubmit, first, showGuest, hideGues
                 value={first.children}
                 readOnly
               />
-              <i className="fa fa-plus btn-counter" onClick={() => {guestControl('children', '+')}}></i>
+              <i
+                className='fa fa-plus btn-counter'
+                onClick={() => {
+                  guestControl('children', '+')
+                }}
+              ></i>
             </div>
           </div>
         </div>
       </div>
       <div className='search'>
-        <button className='btn' type='submit'>Search</button>
+        <button className='btn' type='submit'>
+          Search
+        </button>
       </div>
     </form>
   )

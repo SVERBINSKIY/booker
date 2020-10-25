@@ -16,10 +16,10 @@ import {
 const Catalog = (props) => {
   const { catalog, handleGetAllHotels, handleFilterHotel } = props
   useEffect(() => {
-    if (!catalog.filteredHotel.length) {
+    if (!catalog.filteredHotel.length && !catalog.fromMainPage) {
       handleGetAllHotels()
     }
-  }, [handleGetAllHotels, catalog.filteredHotel])
+  }, [handleGetAllHotels, catalog.filteredHotel, catalog.fromMainPage])
 
   useEffect(() => {
     if (catalog.filtered) {

@@ -8,10 +8,10 @@ import {
   CATALOG_FILTER_HOTEL,
   CATALOG_SET_FILTERED,
   CATALOG_UNSET_FILTERED,
-} from "../types"
-import { hideLoader, showLoader } from "./appActions"
-import { searchMinMax } from "../../utils/searchMinMax.utils"
-import { filterHotel } from "../../utils/filterHotel.utils"
+} from '../types'
+import { hideLoader, showLoader } from './appActions'
+import { searchMinMax } from '../../utils/searchMinMax.utils'
+import { filterHotel } from '../../utils/filterHotel.utils'
 
 export function handleSetFiltered() {
   return { type: CATALOG_SET_FILTERED }
@@ -35,14 +35,14 @@ export function catalogToList(layout) {
 export function handleGetAllHotels() {
   return async (dispatch) => {
     dispatch(showLoader())
-    const request = await fetch("/api/hotel/all", {
-      method: "GET",
+    const request = await fetch('/api/hotel/all', {
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
     const data = await request.json()
-    const { min, max } = searchMinMax(data)
+    const { min, max } = searchMinMax(data.data)
     dispatch({
       type: CATALOG_LOADING_ALL,
       payload: { hotels: data.data, price: { min, max } },
@@ -58,9 +58,9 @@ export function handlePriceRangeChange(min, max) {
 }
 export function handleSetPropertyTypeChange(name) {
   return (dispatch) => {
-    if (name === "hotel") {
+    if (name === 'hotel') {
       dispatch({ type: CATALOG_CHANGE_PROPERTY_TYPE_HOTEL })
-    } else if (name === "apartment") {
+    } else if (name === 'apartment') {
       dispatch({ type: CATALOG_CHANGE_PROPERTY_TYPE_APARTMENT })
     }
   }
